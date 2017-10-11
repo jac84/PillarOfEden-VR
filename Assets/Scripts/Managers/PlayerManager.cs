@@ -5,4 +5,8 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
 	[SerializeField] private VRPlayer vRPlayer;
 	
+	void Update()
+	{
+		vRPlayer.UpdatePlayer();
+	}
 }

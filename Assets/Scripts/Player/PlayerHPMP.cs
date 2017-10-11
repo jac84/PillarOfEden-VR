@@ -10,6 +10,8 @@ public class PlayerHPMP : MonoBehaviour, IHealth
     [SerializeField] private int manaPoints;
     [SerializeField] private int maxManaPoints;
 
+    [SerializeField] private UpdateHPBeads hPBeads;
+
     public bool canTakeDamage = true;
 
     public void TakeDamage(int amount)

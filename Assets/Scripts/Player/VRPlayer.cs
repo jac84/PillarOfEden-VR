@@ -9,13 +9,31 @@ public class VRPlayer : MonoBehaviour
     [SerializeField] private VRTK_BasicTeleport teleport;
     [SerializeField] private Spell currentSpell;
     [SerializeField] private PlayerHPMP playerHealth;
-    public Spell GetCurrentSpell()
-    {
-      return currentSpell;
-    }
+    [SerializeField] private VRTK_ControllerEvents controllerEvents;
 
+    [SerializeField] private GameObject Target;
+
+    void Start()
+    {
+        AssignControllerEvents();
+    }
     public void UpdatePlayer()
     {
+    }
+    public Spell GetCurrentSpell()
+    {
+        return currentSpell;
+    }
 
+    //Assign Controller Events
+    void AssignControllerEvents()
+    {
+        controllerEvents.TriggerPressed += new ControllerInteractionEventHandler(LockOn);
+    }
+
+    private void LockOn(object sender, ControllerInteractionEventArgs e)
+    {
+        Debug.Log("TriggerPressed, Locking on...");
+        GameManager.singleton.mainVRCamera.GetComponent<CameraRayCaster>().LockOnEnemy();
     }
 }
