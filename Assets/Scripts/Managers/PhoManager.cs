@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PhoManager : Photon.MonoBehaviour {
+
+    private GameObject PlayerObj;
+
+
     public void AutoConnect(string gameVersion )
     {
         PhotonNetwork.ConnectUsingSettings(gameVersion);
@@ -22,14 +26,12 @@ public class PhoManager : Photon.MonoBehaviour {
     {
         RoomSetup();
     }
-
+    //Really can't do anything until this happens.
     public virtual void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate("Player", new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), 0);
+        PlayerObj = PhotonNetwork.Instantiate("Player", new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), 0);
+        PlayerObj.GetComponent<PhotonView>().owner.NickName = "V.R Player";
     }
 
-    void Start()
-    {
 
-    }
 }
