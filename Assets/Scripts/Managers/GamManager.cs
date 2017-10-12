@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GamManager : MonoBehaviour {
+public class GamManager : Photon.MonoBehaviour {
     
     [SerializeField] private PhoManager Network_Manager;
 
@@ -11,9 +11,19 @@ public class GamManager : MonoBehaviour {
         Network_Manager.AutoConnect("test");
         
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    //Another player connecting
+    public virtual void OnPhotonPlayerConnected(PhotonPlayer other)
+    {
+        Debug.Log("Mobile player has connected! " + other.NickName);
+    }
+
+    //We will have to decide what the VR client should upon this action.
+    public virtual void OnPhotonPlayerDisconnected(PhotonPlayer other)
+    {
+        Debug.Log("Mobile player been disconnected");
+    }
+
+
+
 }
