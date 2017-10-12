@@ -32,7 +32,7 @@ public class CameraRayCaster : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 screenPoint = Camera.main.WorldToViewportPoint(lastObjectInSights.transform.position);
-        if (!(screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1) && !lastObjectInSights)
+        if (!(screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1))
         {
             LockedOn = false;
             return;

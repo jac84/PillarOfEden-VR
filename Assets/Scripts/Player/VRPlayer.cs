@@ -34,6 +34,6 @@ public class VRPlayer : MonoBehaviour
     private void LockOn(object sender, ControllerInteractionEventArgs e)
     {
         Debug.Log("TriggerPressed, Locking on...");
-        GameManager.singleton.mainVRCamera.GetComponent<CameraRayCaster>().LockOnEnemy();
+        GamManager.singleton.mainVRCamera.GetComponent<CameraRayCaster>().LockOnEnemy();
     }
 }
