@@ -26,10 +26,11 @@ public class EnemyManager : MonoBehaviour
     */
     void FixedUpdate()
     {
+        /*
         foreach (Enemy enemy in enemies)
         {
             enemy.UpdateEnemyMovement();
-        }
+        } */
     }
     /**
     * @brief Spawn Specified Enemy

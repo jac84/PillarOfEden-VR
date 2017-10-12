@@ -31,9 +31,11 @@ public class CameraRayCaster : MonoBehaviour
     private void EyeRaycastTarget()
     {
         RaycastHit hit;
-        if (!lastObjectInSights)
+        Vector3 screenPoint = Camera.main.WorldToViewportPoint(lastObjectInSights.transform.position);
+        if (!(screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1) && !lastObjectInSights)
         {
             LockedOn = false;
+            return;
         }
         if (Physics.Raycast(transform.position, (lastObjectInSights.transform.position - transform.position), out hit, m_RayLength))
         {
@@ -57,9 +59,9 @@ public class CameraRayCaster : MonoBehaviour
             currentInteractible = obj;
             // Deactive the last interactive item 
             if (obj != lastObjectInSights)
-			{
+            {
                 DeactiveLastInteractible();
-			}
+            }
             if (obj && obj != lastObjectInSights)
             {
                 obj.Over();
