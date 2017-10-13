@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
 
-    [SerializeField] private List<Enemy> enemies;
+    [SerializeField] private List<IEnemy> enemies;
     [SerializeField] private GameObject lastEnemyToBeSpawned = null;
     public List<BoxCollider> enemySpawnPoints;
 
@@ -26,18 +26,17 @@ public class EnemyManager : MonoBehaviour
     */
     void FixedUpdate()
     {
-        /*
-        foreach (Enemy enemy in enemies)
+        foreach (IEnemy enemy in enemies)
         {
             enemy.UpdateEnemyMovement();
-        } */
+        }
     }
     /**
     * @brief Spawn Specified Enemy
      */
     public void SpawnEnemy(GameObject enemy)
     {
-        Enemy eCom = null;
+        IEnemy eCom = null;
         GameObject e = null;
         Vector3 position;
         BoxCollider spwnPoint = null;
@@ -55,7 +54,7 @@ public class EnemyManager : MonoBehaviour
             Debug.Log("Failed to initiate enemy");
             return;
         }
-        eCom = e.GetComponent<Enemy>();
+        eCom = e.GetComponent<IEnemy>();
         enemies.Add(eCom);
         lastEnemyToBeSpawned = e;
     }
@@ -64,10 +63,10 @@ public class EnemyManager : MonoBehaviour
      */
     public void DespawnEnemy(GameObject enemy)
     {
-        Enemy foundEnemy = null;
+        IEnemy foundEnemy = null;
         if (enemy != null)
         {
-            foundEnemy = enemies.Find(e => e == enemy.GetComponent<Enemy>());
+            foundEnemy = enemies.Find(e => e == enemy.GetComponent<IEnemy>());
             if (foundEnemy != null)
             {
                 Debug.Log("Despawn Enemy Failed: Could not find enemy or list is empty");

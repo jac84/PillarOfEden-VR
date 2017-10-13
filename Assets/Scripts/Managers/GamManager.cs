@@ -2,35 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GamManager : Photon.MonoBehaviour
-{
-
-    static GamManager instance = null;
-    public Camera mainVRCamera;
+public class GamManager : Photon.MonoBehaviour {
+    
     [SerializeField] private PhoManager Network_Manager;
 
-    public static GamManager singleton
-    {
-        get
-        {
-            return instance;
-        }
-    }
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
-    void Start()
-    {
+    // Use this for initialization
+    void Start () {
         Network_Manager.AutoConnect("test");
-    }
+        
+	}
 
     //Another player connecting
     public virtual void OnPhotonPlayerConnected(PhotonPlayer other)
