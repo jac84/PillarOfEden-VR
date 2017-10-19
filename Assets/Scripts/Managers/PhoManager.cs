@@ -5,7 +5,7 @@ using UnityEngine;
 public class PhoManager : Photon.MonoBehaviour {
 
     private GameObject PlayerObj;
-
+    private bool networkstatus= false;
 
     public void AutoConnect(string gameVersion )
     {
@@ -21,7 +21,6 @@ public class PhoManager : Photon.MonoBehaviour {
     }
 
     //Seems redundant but just in case we want to do other other things when the clinet
-    //joins lobby.
     public virtual void OnJoinedLobby()
     {
         RoomSetup();
@@ -29,9 +28,29 @@ public class PhoManager : Photon.MonoBehaviour {
     //Really can't do anything until this happens.
     public virtual void OnJoinedRoom()
     {
+        networkstatus = true;
         PlayerObj = PhotonNetwork.Instantiate("Player", new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), 0);
         PlayerObj.GetComponent<PhotonView>().owner.NickName = "V.R Player";
     }
+    
+    public virtual void OnLeftRoom()
+    {
+        networkstatus = false;
+    }
 
+    public bool NetworkStatus()
+    {
+        return networkstatus;
+    }
+    //Another player connecting
+    public virtual void OnPhotonPlayerConnected(PhotonPlayer other)
+    {
+        Debug.Log("Mobile player has connected! " + other.NickName);
+    }
 
+    //We will have to decide what the VR client should upon this action.
+    public virtual void OnPhotonPlayerDisconnected(PhotonPlayer other)
+    {
+        Debug.Log("Mobile player been disconnected");
+    }
 }

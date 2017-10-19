@@ -5,22 +5,16 @@ using UnityEngine;
 public class EntityManager : MonoBehaviour {
 
 	[SerializeField] private EnemyManager enemyManager;
+    //List of enemies avaiable to spawn.
+	[SerializeField]List<string> Enemylist;
+    Random randspawn = new Random();
 
-	public GameObject temp;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(Input.GetKeyDown(KeyCode.Space))
-		{
-			enemyManager.SpawnEnemy(temp);
-		}
-		if(Input.GetKeyDown(KeyCode.D))
-		{
-			enemyManager.DespawnEnemy(enemyManager.GetLastEnemySpawned());
-		}	
-	}
+    public void SpawnWave(int difficulty)
+    {
+        for (int i = 0; i < difficulty; i++)
+        {
+            enemyManager.SpawnEnemy(Enemylist[Random.Range(0, Enemylist.Count)]);
+        }
+    }
+
 }
