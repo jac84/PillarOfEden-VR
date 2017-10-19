@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Spell : MonoBehaviour {
+public abstract class Spell : MonoBehaviour
+{
 
-	[SerializeField] protected Transform handPosition;
-	[SerializeField] protected GameObject projectile;
-	[SerializeField] protected VRPlayer player;
-	
-	public abstract void ActivateSpell();
+    [SerializeField] protected Transform handPosition;
+    [SerializeField] protected GameObject projectile;
+    [SerializeField] protected VRPlayer player;
+    [SerializeField] protected int MPCost;
+
+    public abstract void ActivateSpell();
 }

@@ -34,10 +34,10 @@ namespace LeapMotionSimpleControl
 				if (leftHand == null || rightHand == null) {
 					Debug.Log ("Please present the correct left hand and right hand");
 				} else {
-					if (isOpenFullHand (leftHand) && isOpenFullHand (rightHand)
-					  && isOppositeDirection (leftHand.PalmNormal, rightHand.PalmNormal)
-					  && isOppositeDirection (leftHand.PalmVelocity, rightHand.PalmVelocity)
-					  && isHandMoveForward (leftHand) && isHandMoveForward (rightHand)) {
+					if (_gestureManager.isOpenFullHand (leftHand) && _gestureManager.isOpenFullHand (rightHand)
+					  && _gestureManager.isOppositeDirection (leftHand.PalmNormal, rightHand.PalmNormal,handForwardDegree)
+					  && _gestureManager.isOppositeDirection (leftHand.PalmVelocity, rightHand.PalmVelocity,handForwardDegree)
+					  && _gestureManager.isHandMoveForward (leftHand,handForwardDegree,smallestVelocity) && _gestureManager.isHandMoveForward (rightHand,handForwardDegree, smallestVelocity)) {
 						return true;
 					}
 

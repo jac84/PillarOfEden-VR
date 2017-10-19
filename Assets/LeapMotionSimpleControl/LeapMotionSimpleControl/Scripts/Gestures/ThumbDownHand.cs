@@ -28,7 +28,7 @@ namespace LeapMotionSimpleControl
 		{
 			Hand hand = GetCurrent1Hand ();
 			if (hand != null) {
-				if (checkPalmNormalInXZPlane (hand) && checkFingerCloseToHand (hand) && isThumbDirection (hand, -Vector3.up)) {
+				if (_gestureManager.checkPalmNormalInXZPlane (hand) && _gestureManager.checkFingerCloseToHand (hand,deltaCloseFinger) && _gestureManager.isThumbDirection (hand, -Vector3.up,deltaAngleThumb)) {
 					return true;
 				}
 			}

@@ -36,11 +36,11 @@ namespace LeapMotionSimpleControl
 		{
 			Hand hand = GetCurrent1Hand ();
 			if (hand != null) {
-				if (isStationary (hand) && isOpenFullHand (hand)) {
+				if (_gestureManager.isStationary (hand,smallestVelocity) && _gestureManager.isOpenFullHand (hand)) {
 					return true;
 				} 
 
-				if (!isStationary (hand)) {
+				if (!_gestureManager.isStationary (hand,smallestVelocity)) {
 					_isZoom = false;
 				}
 			} else {

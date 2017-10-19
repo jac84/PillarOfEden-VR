@@ -29,7 +29,7 @@ namespace LeapMotionSimpleControl
 		{
 			Hand hand = GetCurrent1Hand ();
 			if (hand != null) {
-				if (isCloseHand (hand) && isStationary (hand)) {
+				if (_gestureManager.isCloseHand (hand,deltaCloseFinger) && _gestureManager.isStationary (hand,smallestVelocity)) {
 					return true;
 				}
 			}

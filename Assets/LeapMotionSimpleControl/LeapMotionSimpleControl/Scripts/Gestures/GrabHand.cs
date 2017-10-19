@@ -40,7 +40,7 @@ namespace LeapMotionSimpleControl
 		{
 			Hand hand = GetCurrent1Hand ();
 			if (hand != null) {
-				if (isGrabHand (hand) && !_isHoldingBall)
+				if (_gestureManager.isGrabHand (hand) && !_isHoldingBall)
 					return true;
 			}
 
@@ -68,7 +68,7 @@ namespace LeapMotionSimpleControl
 			if (_isHoldingBall) {
 				Hand hand = GetCurrent1Hand ();
 				if (hand != null) {
-					if (isGrabHand (hand)) {
+					if (_gestureManager.isGrabHand (hand)) {
 						if (CurrentHoldingObj != null) {
 							CurrentHoldingObj.transform.position = UnityVectorExtension.ToVector3 (hand.PalmPosition + hand.PalmNormal.Normalized * 0.03f);
 							isUpdating = true;

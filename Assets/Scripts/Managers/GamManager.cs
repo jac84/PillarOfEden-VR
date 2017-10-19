@@ -7,6 +7,9 @@ public class GamManager : Photon.MonoBehaviour
 
     static GamManager instance = null;
     public Camera mainVRCamera;
+
+    /**Settings */
+    [SerializeField] private bool IsLeftHanded = false;
     [SerializeField] private PhoManager Network_Manager;
 
     public static GamManager singleton

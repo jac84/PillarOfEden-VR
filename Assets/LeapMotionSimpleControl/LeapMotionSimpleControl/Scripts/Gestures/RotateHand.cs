@@ -45,11 +45,11 @@ namespace LeapMotionSimpleControl
 			if (!_isBlock) {
 				Hand hand = GetCurrent1Hand ();
 				if (hand != null) {
-					if (isOpenFullHand (hand)) {
-						if (isMoveLeft (hand) || isMoveRight (hand)) {
+					if (_gestureManager.isOpenFullHand (hand)) {
+						if (_gestureManager.isMoveLeft (hand,deltaVelocity,smallestVelocity) || _gestureManager.isMoveRight (hand,deltaVelocity,smallestVelocity)) {
 							CurrentType = GestureManager.GestureTypes.RotateHonz;
 							return true;
-						} else if (isMoveUp (hand) || isMoveDown (hand)) {
+						} else if (_gestureManager.isMoveUp (hand,deltaVelocity,smallestVelocity) || _gestureManager.isMoveDown (hand,deltaVelocity,smallestVelocity)) {
 							CurrentType = GestureManager.GestureTypes.RotateVert;
 							return true;
 						} 
@@ -64,11 +64,11 @@ namespace LeapMotionSimpleControl
 			Hand hand = GetCurrent1Hand ();
 			Vector3 delta; 
 			if (CurrentType == GestureManager.GestureTypes.RotateHonz) {
-				_delta = -getHandVelocity (hand).x;
-				delta = new Vector3 (0,  -getHandVelocity (hand).x * 100, 0);
+				_delta = -_gestureManager.getHandVelocity (hand).x;
+				delta = new Vector3 (0,  -_gestureManager.getHandVelocity (hand).x * 100, 0);
 			} else {
-				_delta = getHandVelocity (hand).y;
-				delta = new Vector3 (getHandVelocity (hand).y * 100, 0, 0);
+				_delta = _gestureManager.getHandVelocity (hand).y;
+				delta = new Vector3 (_gestureManager.getHandVelocity (hand).y * 100, 0, 0);
 			}
 
 			_fromRot = cube.localEulerAngles;

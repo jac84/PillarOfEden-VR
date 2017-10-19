@@ -28,7 +28,7 @@ namespace LeapMotionSimpleControl
 		{
 			Hand hand = GetCurrent1Hand ();
 			if (hand != null) {
-				if (isOpenFullHand (hand) && isMoveRight (hand)) {
+				if (_gestureManager.isOpenFullHand (hand) && _gestureManager.isMoveRight (hand,deltaVelocity,smallestVelocity)) {
 					return true;
 				}
 			}

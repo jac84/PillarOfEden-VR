@@ -28,7 +28,7 @@ namespace LeapMotionSimpleControl
 		{
 			Hand hand = GetCurrent1Hand ();
 			if (hand != null) {
-				if (isOpenFullHand (hand) && isPalmNormalSameDirectionWith (hand, -Vector3.up)) {
+				if (_gestureManager.isOpenFullHand (hand) && _gestureManager.isPalmNormalSameDirectionWith (hand, -Vector3.up,handForwardDegree)) {
 					return true;
 				}
 			}

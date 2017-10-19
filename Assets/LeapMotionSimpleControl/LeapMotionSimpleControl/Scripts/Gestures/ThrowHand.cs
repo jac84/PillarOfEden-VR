@@ -31,8 +31,8 @@ namespace LeapMotionSimpleControl
 		{
 			Hand hand = GetCurrent1Hand ();
 			if (hand != null) {
-				if (isPalmNormalSameDirectionWith (hand, UnityVectorExtension.ToVector3 (hand.PalmVelocity))
-				   && !isStationary (hand)) {
+				if (_gestureManager.isPalmNormalSameDirectionWith (hand, UnityVectorExtension.ToVector3 (hand.PalmVelocity),handForwardDegree)
+				   && !_gestureManager.isStationary (hand,smallestVelocity)) {
 					return true;
 				}
 			}

@@ -28,14 +28,14 @@ public class PlayerHPMP : MonoBehaviour, IHealth
     }
 	public void SpendMana(int amount)
 	{
-
+        manaPoints -= amount;
 	}
 	public void RegenerateMana(int amount)
 	{
-
+        manaPoints += amount;
 	}
 	public void RegenerateHealth(int amount)
 	{
-		
+		healthPoints += amount;
 	}
 }
