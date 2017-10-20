@@ -8,19 +8,36 @@ public class VRPlayer : MonoBehaviour
     // Use this for initialization
     [SerializeField] private VRTK_BasicTeleport teleport;
     [SerializeField] private Spell currentSpell;
-<<<<<<< HEAD
     [SerializeField] private PlayerHPMP playerBeads;
     [SerializeField] private VRTK_ControllerEvents controllerEvents;
-=======
->>>>>>> b7b9f88c1211c5408fb64275625f9fed406fd918
 
+    [SerializeField] private GameObject Target;
+
+    void Start()
+    {
+        AssignControllerEvents();
+    }
+    public void UpdatePlayer()
+    {
+    }
     public Spell GetCurrentSpell()
     {
-      return currentSpell;
+        return currentSpell;
     }
     public PlayerHPMP GetBeads()
     {
         return playerBeads;
     }
 
+    //Assign Controller Events
+    void AssignControllerEvents()
+    {
+        controllerEvents.TriggerPressed += new ControllerInteractionEventHandler(LockOn);
+    }
+
+    private void LockOn(object sender, ControllerInteractionEventArgs e)
+    {
+        Debug.Log("TriggerPressed, Locking on...");
+        GamManager.singleton.mainVRCamera.GetComponent<CameraRayCaster>().LockOnEnemy();
+    }
 }

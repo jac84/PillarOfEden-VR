@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<< HEAD
 public class GamManager : Photon.MonoBehaviour
 {
 
@@ -10,17 +9,32 @@ public class GamManager : Photon.MonoBehaviour
     public Camera mainVRCamera;
 
     /**Settings */
-    [SerializeField] private bool IsLeftHanded = false;
-=======
-public class GamManager : Photon.MonoBehaviour {
-    
->>>>>>> b7b9f88c1211c5408fb64275625f9fed406fd918
+    [SerializeField] private bool LeftHanded = false;
     [SerializeField] private PhoManager Network_Manager;
     [SerializeField] private EntityManager entity_manager;
     private bool Gameready;
     public int difficulty;
+    public static GamManager singleton
+    {
+        get
+        {
+            return instance;
+        }
+    }
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
     // Use this for initialization
     void Start () {
+        if(Network_Manager != null)
         Network_Manager.AutoConnect("test");
         
 	}
@@ -33,6 +47,11 @@ public class GamManager : Photon.MonoBehaviour {
                 entity_manager.SpawnWave(difficulty);
             }
         }   
+    }
+
+    public bool IsLeftHanded()
+    {
+        return LeftHanded;
     }
 
 

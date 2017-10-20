@@ -28,7 +28,7 @@ namespace LeapMotionSimpleControl
 
         protected override bool checkConditionGesture()
         {
-            Hand hand = GetCurrent1Hand();
+            Hand hand = GetSupportedHand();
             if (hand != null)
             {
                 if (_gestureManager.isAllFingersExtended(hand))
@@ -46,7 +46,7 @@ namespace LeapMotionSimpleControl
         }
         protected override bool checkPrerequisite()
         {
-            Hand hand = GetCurrent1Hand();
+            Hand hand = GetSupportedHand();
             if (hand != null)
             {
                 if (containsPrerequisite != null)

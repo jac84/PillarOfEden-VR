@@ -53,6 +53,21 @@ namespace LeapMotionSimpleControl
             else
                 return null;
         }
+        protected Hand GetSupportedHand()
+        {
+            foreach(Hand h in _listHands)
+            {
+                if(GamManager.singleton.IsLeftHanded() && h.IsLeft)
+                {
+                    return h;
+                }
+                else if(!GamManager.singleton.IsLeftHanded() && !h.IsLeft)
+                {
+                    return h;
+                }
+            }
+            return null;
+        }
 
         #region Logic variables
 
