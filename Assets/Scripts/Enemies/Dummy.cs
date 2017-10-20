@@ -2,18 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dummy : Enemy
+public class Dummy : IEnemy
 {
 
     public DummyMove dummyMove;
+
     public override void UpdateEnemyMovement()
-    {
-        if (dummyMove != null)
-        {
-            dummyMove.Move();
-        }
-    }
-    void FixedUpdate()
     {
         if (dummyMove != null)
         {

@@ -516,8 +516,6 @@ public enum CloudRegionCode
     kr = 9,
     ///<summary>India, Chennai, in</summary>
     @in = 10,
-    /// <summary>Russia, ru</summary>
-    ru = 11,
 
     /// <summary>No region selected.</summary>
     none = 4
@@ -541,7 +539,6 @@ public enum CloudRegionFlag
     cae =   1 << 7,
     kr =    1 << 8,
     @in =   1 << 9,
-    ru =    1 << 10
 };
 
 

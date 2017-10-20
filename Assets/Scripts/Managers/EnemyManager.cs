@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : Photon.MonoBehaviour
 {
 
-    [SerializeField] private List<Enemy> enemies;
+    [SerializeField] private List<IEnemy> enemies;
     [SerializeField] private GameObject lastEnemyToBeSpawned = null;
     public List<BoxCollider> enemySpawnPoints;
-
+    //[SerializeField] private List<string> Enemies;
     // Use this for initialization
     void Start()
     {
@@ -26,18 +26,17 @@ public class EnemyManager : MonoBehaviour
     */
     void FixedUpdate()
     {
-        /*
-        foreach (Enemy enemy in enemies)
+        foreach (IEnemy enemy in enemies)
         {
             enemy.UpdateEnemyMovement();
-        } */
+        }
     }
     /**
     * @brief Spawn Specified Enemy
      */
-    public void SpawnEnemy(GameObject enemy)
+    public void SpawnEnemy(string enemy)
     {
-        Enemy eCom = null;
+        IEnemy eCom = null;
         GameObject e = null;
         Vector3 position;
         BoxCollider spwnPoint = null;
@@ -49,13 +48,13 @@ public class EnemyManager : MonoBehaviour
         Random.Range(spwnPoint.transform.position.z - (spwnPoint.size.z / 2), spwnPoint.transform.position.z + (spwnPoint.size.z / 2)));
         Debug.Log(position);
         //Remember to replace Instatiate with Photons Instatiate method!!!!!
-        e = Instantiate(enemy, position, Quaternion.identity);
+        e = PhotonNetwork.Instantiate(enemy, position, Quaternion.identity,0);
         if (e == null)
         {
             Debug.Log("Failed to initiate enemy");
             return;
         }
-        eCom = e.GetComponent<Enemy>();
+        eCom = e.GetComponent<IEnemy>();
         enemies.Add(eCom);
         lastEnemyToBeSpawned = e;
     }
@@ -64,15 +63,15 @@ public class EnemyManager : MonoBehaviour
      */
     public void DespawnEnemy(GameObject enemy)
     {
-        Enemy foundEnemy = null;
+        IEnemy foundEnemy = null;
         if (enemy != null)
         {
-            foundEnemy = enemies.Find(e => e == enemy.GetComponent<Enemy>());
+            foundEnemy = enemies.Find(e => e == enemy.GetComponent<IEnemy>());
             if (foundEnemy != null)
             {
                 Debug.Log("Despawn Enemy Failed: Could not find enemy or list is empty");
                 enemies.Remove(foundEnemy);
-                Destroy(foundEnemy.gameObject);
+               PhotonNetwork.Destroy(foundEnemy.gameObject);
                 if (enemies.Count > 0)
                     lastEnemyToBeSpawned = enemies[enemies.Count - 1].gameObject;
             }

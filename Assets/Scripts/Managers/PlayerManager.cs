@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 	[SerializeField] private VRPlayer vRPlayer;
+	// Use this for initialization
+	void Start () {
+		
+	}
 	
-	void Update()
-	{
-		vRPlayer.UpdatePlayer();
+	// Update is called once per frame
+	void Update () {
+		
 	}
 }

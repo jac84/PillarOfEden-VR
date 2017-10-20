@@ -5,7 +5,10 @@
 /[Bb]uilds/
 /Assets/AssetStoreTools*
 /Assets/Packages/
-/Assets/PhotonChatApi/
+/Assets/Photon*
+/Assets/Plugins
+/Assets/Procore
+/Assets/Surforge
 # Visual Studio 2015 cache directory
 /.vs/
 
@@ -30,4 +33,3 @@ sysinfo.txt
 
 # Builds
 *.apk
-*.unitypackage

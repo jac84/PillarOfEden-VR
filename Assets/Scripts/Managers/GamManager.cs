@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+<<<<<<< HEAD
 public class GamManager : Photon.MonoBehaviour
 {
 
@@ -10,41 +11,28 @@ public class GamManager : Photon.MonoBehaviour
 
     /**Settings */
     [SerializeField] private bool IsLeftHanded = false;
+=======
+public class GamManager : Photon.MonoBehaviour {
+    
+>>>>>>> b7b9f88c1211c5408fb64275625f9fed406fd918
     [SerializeField] private PhoManager Network_Manager;
-
-    public static GamManager singleton
-    {
-        get
-        {
-            return instance;
-        }
-    }
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
-    void Start()
-    {
+    [SerializeField] private EntityManager entity_manager;
+    private bool Gameready;
+    public int difficulty;
+    // Use this for initialization
+    void Start () {
         Network_Manager.AutoConnect("test");
-    }
-
-    //Another player connecting
-    public virtual void OnPhotonPlayerConnected(PhotonPlayer other)
+        
+	}
+    void Update()
     {
-        Debug.Log("Mobile player has connected! " + other.NickName);
-    }
-
-    //We will have to decide what the VR client should upon this action.
-    public virtual void OnPhotonPlayerDisconnected(PhotonPlayer other)
-    {
-        Debug.Log("Mobile player been disconnected");
+        if (Input.GetKeyDown("l"))
+        {
+            if (Network_Manager.NetworkStatus())
+            {
+                entity_manager.SpawnWave(difficulty);
+            }
+        }   
     }
 
 

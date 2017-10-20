@@ -2,31 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityManager : MonoBehaviour
-{
+public class EntityManager : MonoBehaviour {
 
-    [SerializeField] private EnemyManager enemyManager;
-    
-    [SerializeField] private UpdateHPBeads hpBracelet;
+	[SerializeField] private EnemyManager enemyManager;
+    //List of enemies avaiable to spawn.
+	[SerializeField]List<string> Enemylist;
+    Random randspawn = new Random();
 
-    public GameObject temp;
-    // Use this for initialization
-    void Start()
+    public void SpawnWave(int difficulty)
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        for (int i = 0; i < difficulty; i++)
         {
-            enemyManager.SpawnEnemy(temp);
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            enemyManager.DespawnEnemy(enemyManager.GetLastEnemySpawned());
+            enemyManager.SpawnEnemy(Enemylist[Random.Range(0, Enemylist.Count)]);
         }
     }
+
 }
