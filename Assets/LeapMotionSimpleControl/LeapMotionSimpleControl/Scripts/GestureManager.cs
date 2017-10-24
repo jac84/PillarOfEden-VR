@@ -17,7 +17,10 @@ namespace LeapMotionSimpleControl
 
         public enum GestureTypes
         {
+            PointDown,
+            HandsOpenHold,
             SwipingLeft,
+            HandsOpen,
             SwipingRight,
             SwipingUp,
             SwipingDown,
@@ -29,10 +32,9 @@ namespace LeapMotionSimpleControl
             ClapHand,
             Grab,
             Throw,
-            HandsOpen,
             RotateHonz,
             RotateVert,
-            ZoomHand
+            ZoomHand            
         }
 
         public GestureTypes _currentType;
@@ -66,12 +68,6 @@ namespace LeapMotionSimpleControl
             Invoke("initGesture", 3f);
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         public void initGesture()
         {
             _listActiveGestures = new Dictionary<GestureTypes, object>();
@@ -99,6 +95,13 @@ namespace LeapMotionSimpleControl
                     t.GetComponent<BehaviorHand>().Init(this);
                 }
             }
+        }
+        public BehaviorHand ActiveBehaviorHand;
+        public void ResetHandOnExit()
+        {
+            ActiveBehaviorHand.GetCounter().DelayReset = false;
+            ActiveBehaviorHand.ResetListHands();
+            Debug.Log("ResetHand");
         }
 
         public virtual bool ReceiveEvent(GestureTypes type)
@@ -207,6 +210,24 @@ namespace LeapMotionSimpleControl
                 return true;
             return false;
         }
+        //<Jason> - Pillar Of Eden
+        public bool isFingerExtended(Hand hand, Finger.FingerType type)
+        {
+            List<Finger> listOfFingers = hand.Fingers;
+            for (int f = 0; f < listOfFingers.Count; f++)
+            {
+                Finger finger = listOfFingers[f];
+
+                if (finger.Type == type)
+                {
+                    if(finger.IsExtended)
+                    {
+                        return true;
+                    }
+                }
+            }
+                    return false;
+        }
 
 
         public bool isPalmNormalSameDirectionWith(Hand hand, Vector3 dir, float handForwardDegree)
@@ -245,6 +266,30 @@ namespace LeapMotionSimpleControl
                     //Debug.Log (angleThumbFinger + " " + angleThumbFinger2);
                     if (angleThumbFinger < deltaAngleThumb
                        || angleThumbFinger2 < deltaAngleThumb)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            return false;
+        }
+        //Jason <PillarOfEden>
+        public bool isFingerDirection(Hand hand,Finger.FingerType finterType ,Vector3 dir, float deltaAngle)
+        {
+            List<Finger> listOfFingers = hand.Fingers;
+            for (int f = 0; f < listOfFingers.Count; f++)
+            {
+                Finger finger = listOfFingers[f];
+
+                if (finger.Type == finterType)
+                {
+                    float angleFinger = angle2LeapVectors(finger.Direction,
+                                                UnityVectorExtension.ToVector(dir));
+                    float angleFinger2 = angle2LeapVectors(
+                                                 finger.StabilizedTipPosition - hand.PalmPosition, UnityVectorExtension.ToVector(dir));
+                    //Debug.Log (angleThumbFinger + " " + angleThumbFinger2);
+                    if (angleFinger < deltaAngle
+                       || angleFinger2 < deltaAngle)
                         return true;
                     else
                         return false;

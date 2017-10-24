@@ -10,13 +10,15 @@ public class PlayerHPMP : MonoBehaviour, IHealth
     [SerializeField] private int manaPoints;
     [SerializeField] private int maxManaPoints;
 
-    [SerializeField] private UpdateHPBeads hPBeads;
+    [SerializeField] private UpdateBracelet hPBeads;
+    [SerializeField] private UpdateBracelet manaBeads;
 
     public bool canTakeDamage = true;
 
     public void TakeDamage(int amount)
     {
         healthPoints = healthPoints > amount ? healthPoints - amount : 0;
+        hPBeads.UpdateBeads(healthPoints, maxHealthPoints);
     }
     public int GetPercentageHP()
     {
@@ -29,6 +31,7 @@ public class PlayerHPMP : MonoBehaviour, IHealth
 	public void SpendMana(int amount)
 	{
         manaPoints -= amount;
+        manaBeads.UpdateBeads(manaPoints, maxManaPoints);
 	}
 	public void RegenerateMana(int amount)
 	{
