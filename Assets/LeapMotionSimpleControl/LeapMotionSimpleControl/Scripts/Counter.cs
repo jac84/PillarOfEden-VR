@@ -40,6 +40,7 @@ namespace CustomUtils
         protected EndTimer _endTimerFunction;
         protected EndEverySeconds _endEverySeconds;
         protected UpdatingPercentage _updating;
+        public bool DelayReset = false;
 
         // Use this for initialization
         void Start()
@@ -72,8 +73,11 @@ namespace CustomUtils
 
                     if (timer < 0)
                     {
-                        timer = maxTimer;
-                        currentState = CounterState.STOP;
+                        if (!DelayReset)
+                        {
+                            timer = maxTimer;
+                            currentState = CounterState.STOP;
+                        }
                         if (_endTimerFunction != null)
                         {
                             _endTimerFunction();

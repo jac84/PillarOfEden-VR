@@ -9,25 +9,20 @@ namespace LeapMotionSimpleControl
 {
 	public class SwipingLeftHand : BehaviorHand
 	{
-
-		// Use this for initialization
-		protected void Awake ()
+        public Spell assignedSpell;
+        // Use this for initialization
+        protected void Awake ()
 		{
 			base.Awake ();
 			CurrentType = GestureManager.GestureTypes.SwipingLeft;
 			// add your custom event 
 			specificEvent = onSwipeEvent;
-		}
-	
-		// Update is called once per frame
-		void Update ()
-		{
-	
-		}
+            //_gestureManager.TimeBetween2Gestures = 1;
+        }
 
 		protected override bool checkConditionGesture ()
 		{
-			Hand hand = GetCurrent1Hand ();
+			Hand hand = GetSupportedHand ();
 			if (hand != null) {
 				if (_gestureManager.isOpenFullHand (hand) && _gestureManager.isMoveLeft (hand,deltaVelocity,smallestVelocity)) {
 					return true;
@@ -37,8 +32,8 @@ namespace LeapMotionSimpleControl
 		}
 
 		void onSwipeEvent(){
-			// TODO : your own logic 
-			Debug.Log("Gust Spell");
-		}
+			Debug.Log("Gust Spell Gesture Cast");
+            assignedSpell.ActivateSpell();
+        }
 	}
 }

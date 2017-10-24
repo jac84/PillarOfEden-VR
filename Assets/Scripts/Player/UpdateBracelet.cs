@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-public class UpdateHPBeads : MonoBehaviour
+public class UpdateBracelet : MonoBehaviour
 {
+
     [SerializeField] private Transform[] beads = new Transform[7];
     [SerializeField] private GameObject currentBead;
     private double percentPerBead;
@@ -37,13 +37,6 @@ public class UpdateHPBeads : MonoBehaviour
             fade = fade - current;
             fade = (float)((percentPerBead - fade) / percentPerBead);
             Color.RGBToHSV(rend.material.color, out h, out s, out v);
-            /* 
-            if(fade < .3f)
-                fade += .2f;
-            else if( fade >.8f){
-                    fade -= .25f;
-                }
-            */
             rend.material.color = Color.HSVToRGB(h, s, fade);
         }
     }

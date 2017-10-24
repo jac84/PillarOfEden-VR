@@ -14,6 +14,7 @@ public class CameraRayCaster : MonoBehaviour
     [SerializeField] private InteractableObject currentInteractible;
 
     [SerializeField] private InteractableObject lastObjectInSights;
+    [SerializeField] private RaycastHit hit;
     // Use this for initialization
 
     [SerializeField] private bool LockedOn = false;
@@ -35,6 +36,7 @@ public class CameraRayCaster : MonoBehaviour
         if (!(screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1))
         {
             LockedOn = false;
+            GamManager.singleton.player.SetTarget(null);
             return;
         }
         if (Physics.Raycast(transform.position, (lastObjectInSights.transform.position - transform.position), out hit, m_RayLength))
@@ -51,7 +53,6 @@ public class CameraRayCaster : MonoBehaviour
 
         // Create a ray that points forwards from the camera.
         Ray ray = new Ray(m_Camera.position, m_Camera.forward);
-        RaycastHit hit;
         // Do the raycast forweards to see if we hit an interactive item
         if (Physics.Raycast(ray, out hit, m_RayLength, ~m_ExclusionLayers))
         {
@@ -95,7 +96,7 @@ public class CameraRayCaster : MonoBehaviour
         lastObjectInSights = null;
     }
 
-    public void LockOnEnemy()
+    public GameObject LockOnEnemy()
     {
         if (currentInteractible && !LockedOn)
         {
@@ -103,12 +104,19 @@ public class CameraRayCaster : MonoBehaviour
             if (enemy)
             {
                 LockedOn = true;
+                return enemy.gameObject;
             }
         }
         else
         {
             LockedOn = false;
             m_Reticle.ResetPosition();
+            return null;
         }
+        return null;
+    }
+    public RaycastHit GetHit()
+    {
+        return hit;
     }
 }
