@@ -13,11 +13,4 @@ public class Dummy : Enemy
             dummyMove.Move();
         }
     }
-    void FixedUpdate()
-    {
-        if (dummyMove != null)
-        {
-            dummyMove.Move();
-        }
-    }
 }

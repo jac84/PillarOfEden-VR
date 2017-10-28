@@ -1,6 +1,3 @@
-/*******************************************************
- * Copyright (C) 2016 Ngan Do - dttngan91@gmail.com
- *******************************************************/
 using UnityEngine;
 using System.Collections;
 using Leap;
@@ -11,7 +8,7 @@ namespace LeapMotionSimpleControl
     {
         public Spell assignedSpell;
 
-        [SerializeField] private PrerequisiteSpell containsPrerequisite = null;
+        private PrerequisiteSpell containsPrerequisite = null;
 
         // Use this for initialization
         protected void Awake()
@@ -19,13 +16,9 @@ namespace LeapMotionSimpleControl
             base.Awake();
             CurrentType = GestureManager.GestureTypes.HandsOpen;
             containsPrerequisite = GetComponent<PrerequisiteSpell>();
+            specificEvent = castSpell;
+            //_gestureManager.TimeBetween2Gestures = 1;
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-        }
-
         protected override bool checkConditionGesture()
         {
             Hand hand = GetSupportedHand();
@@ -63,9 +56,9 @@ namespace LeapMotionSimpleControl
             }            
             return _prerequisiteMet;
         }
-        protected override void castSpell()
+        void castSpell()
         {
-            Debug.Log("Arcane Missile Fired!");
+            Debug.Log("Arcane Missile Gesture Cast");
             assignedSpell.ActivateSpell();
             _prerequisiteMet = false;
         }

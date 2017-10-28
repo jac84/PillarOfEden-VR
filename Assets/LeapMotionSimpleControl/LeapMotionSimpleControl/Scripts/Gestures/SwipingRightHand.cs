@@ -18,15 +18,10 @@ namespace LeapMotionSimpleControl
 	
 		}
 	
-		// Update is called once per frame
-		void Update ()
-		{
-	
-		}
 
 		protected override bool checkConditionGesture ()
 		{
-			Hand hand = GetCurrent1Hand ();
+			Hand hand = GetSupportedHand();
 			if (hand != null) {
 				if (_gestureManager.isOpenFullHand (hand) && _gestureManager.isMoveRight (hand,deltaVelocity,smallestVelocity)) {
 					return true;

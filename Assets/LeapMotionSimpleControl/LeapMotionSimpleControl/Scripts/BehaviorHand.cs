@@ -55,13 +55,13 @@ namespace LeapMotionSimpleControl
         }
         protected Hand GetSupportedHand()
         {
-            foreach(Hand h in _listHands)
+            foreach (Hand h in _listHands)
             {
-                if(GamManager.singleton.IsLeftHanded() && h.IsLeft)
+                if (GamManager.singleton.IsLeftHanded() && h.IsLeft)
                 {
                     return h;
                 }
-                else if(!GamManager.singleton.IsLeftHanded() && !h.IsLeft)
+                else if (!GamManager.singleton.IsLeftHanded() && !h.IsLeft)
                 {
                     return h;
                 }
@@ -111,7 +111,7 @@ namespace LeapMotionSimpleControl
         protected void FixedUpdate()
         {
             updateHands();
-            updateDebug();
+            //updateDebug();
         }
 
 
@@ -126,9 +126,9 @@ namespace LeapMotionSimpleControl
             {
                 Frame frame = _gestureManager.GetLeapHand().CurrentFrame;
                 _listHands = frame.Hands;
-                if (!_isBlock)
+                if (_listHands.Count > 0)
                 {
-                    if (_listHands.Count > 0)
+                    if (!_isBlock)
                     {
                         if (checkPrerequisite())
                         {
@@ -141,8 +141,10 @@ namespace LeapMotionSimpleControl
                                         callEvent();
                                     }, (float percent) =>
                                     {
-                                        if (CheckingTimeBeforeToggle != 0)
-                                            _gestureManager.LoadingGestureProgress(CurrentType, percent);
+
+
+                                        /*if (CheckingTimeBeforeToggle != 0)
+                                            _gestureManager.LoadingGestureProgress(CurrentType, percent);*/
                                     });
                                 }
                             }
@@ -170,11 +172,7 @@ namespace LeapMotionSimpleControl
         }
         protected virtual bool checkPrerequisite()
         {
-            return false;
-        }
-        protected virtual void castSpell()
-        {
-
+            return true;
         }
 
         protected Action specificEvent;
@@ -182,13 +180,22 @@ namespace LeapMotionSimpleControl
         protected void callEvent()
         {
             bool eventSuccess = _gestureManager.ReceiveEvent(CurrentType);
+            _gestureManager.ActiveBehaviorHand = GetComponent<BehaviorHand>();
             if (eventSuccess)
             {
                 _isBlock = true;
-                castSpell();
                 if (specificEvent != null)
                     specificEvent();
             }
+        }
+
+        public Counter GetCounter()
+        {
+            return _counterLoading;
+        }
+        public void ResetListHands()
+        {
+            _listHands.Clear();
         }
 
         #endregion
