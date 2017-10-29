@@ -28,7 +28,7 @@ public class PhoManager : Photon.MonoBehaviour {
     //Really can't do anything until this happens.
     public virtual void OnJoinedRoom()
     {
-        networkstatus = true;
+        //networkstatus = true;
         PlayerObj = PhotonNetwork.Instantiate("Player", new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), 0);
         PlayerObj.GetComponent<PhotonView>().owner.NickName = "V.R Player";
     }
@@ -40,6 +40,10 @@ public class PhoManager : Photon.MonoBehaviour {
 
     public bool NetworkStatus()
     {
+        if (PhotonNetwork.playerList.Length > 1)
+        {
+            networkstatus = true;
+        }
         return networkstatus;
     }
     //Another player connecting
