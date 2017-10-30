@@ -692,7 +692,7 @@ MonoBehaviour:
   spawnWait: 1
   startWait: 5
   waveWait: 1
-  difficulty: 5
+  difficulty: 200
 --- !u!114 &303887168
 MonoBehaviour:
   m_ObjectHideFlags: 0

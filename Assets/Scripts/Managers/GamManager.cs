@@ -21,7 +21,7 @@ public class GamManager : Photon.MonoBehaviour
     public float waveWait;
     private bool Gameready;
     public int difficulty;
-
+    
 
     public static GamManager singleton
     {
@@ -75,10 +75,11 @@ public class GamManager : Photon.MonoBehaviour
         PhotonNetwork.Disconnect();
     }
 
-    //This here is a test. When running this function foreal please use 
+    //This here is a test. When running this function please use 
     //gamestart(Network_Manager.NetworkStatus(),difficulty) It should return a proper network status.
     public virtual void OnJoinedRoom()
     {
         gamestart(true, difficulty);
     }
+
 }

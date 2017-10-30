@@ -88,4 +88,11 @@ public class EnemyManager : Photon.MonoBehaviour
             return lastEnemyToBeSpawned;
         return null;
     }
+    public void EnemyCleanup()
+    {
+        for(int i=0; i > enemies.Count; i++)
+        {
+            
+        }
+    }
 }
