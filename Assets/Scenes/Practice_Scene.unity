@@ -2307,6 +2307,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2097589171}
   serializedVersion: 2
+<<<<<<< HEAD
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
@@ -2315,3 +2316,41 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+=======
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 1
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 4300000, guid: 5413bab15c3dd4a4085a9fe254a17e96, type: 3}
+  m_Bones:
+  - {fileID: 2118320575}
+  - {fileID: 951270486}
+  - {fileID: 1562406867}
+  - {fileID: 1807413248}
+  - {fileID: 1242662130}
+  - {fileID: 1942144654}
+  - {fileID: 157809020}
+  - {fileID: 1607452837}
+  - {fileID: 1147123363}
+  - {fileID: 1259747644}
+  - {fileID: 408540387}
+  - {fileID: 946105825}
+  - {fileID: 856131628}
+  - {fileID: 940401201}
+  - {fileID: 583031742}
+  - {fileID: 599067553}
+  - {fileID: 971398391}
+  - {fileID: 709235264}
+  - {fileID: 850819148}
+  - {fileID: 239239540}
+  - {fileID: 305148026}
+  - {fileID: 1430889527}
+  - {fileID: 1774891073}
+  - {fileID: 784745730}
+  - {fileID: 658243671}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 2118320575}
+  m_AABB:
+    m_Center: {x: -0.08243872, y: -0.0018077325, z: -0.008441988}
+    m_Extent: {x: 0.105598256, y: 0.044362344, z: 0.08608113}
+  m_DirtyAABB: 0
+>>>>>>> PhoUpdate3.0
