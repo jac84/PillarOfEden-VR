@@ -39,7 +39,6 @@ public class UpdateBracelet : MonoBehaviour
             fade = fade - current;
             fade = (float)((percentPerBead - fade) / percentPerBead);
             Color.RGBToHSV(originalColor.color, out h, out s, out v);
-            Debug.Log(originalColor);
             rend.material.color = Color.HSVToRGB(h, s, fade);
         }
     }
