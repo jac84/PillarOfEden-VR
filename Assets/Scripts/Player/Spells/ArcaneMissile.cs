@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class ArcaneMissile : Spell {
 
-    [SerializeField] private float Arc;
+    [Header("ArcaneMissile Attributes")]
+    [SerializeField] private float arcAngle;
+    [SerializeField] private float arcHeight;
+    [SerializeField] private float speed;
     public override void ActivateSpell()
     {
         Spell spell = player.GetCurrentSpell();
@@ -14,23 +17,31 @@ public class ArcaneMissile : Spell {
             {
                 Debug.Log("ArcaneMissile spell casted...");
                 player.GetBeads().SpendMana(MPCost);
-                GameObject p,target;
+                GameObject target;
+                ProjectileArc pa;
                 target = player.GetTarget();
                 if (GamManager.singleton.IsLeftHanded())
                 {
-                    p = Instantiate(projectile, player.leftHandPosition.position, Quaternion.identity);
+                    pa = projectile.Instantiate<ProjectileArc>();
+                    pa.transform.position = player.leftHandPosition.position;
                 }
                 else
                 {
-                    p = Instantiate(projectile, player.rightHandPosition.position, Quaternion.identity);
+                    pa = projectile.Instantiate<ProjectileArc>();
+                    pa.transform.position = player.rightHandPosition.position;
                 }
+                pa.SetDieTime(10.0f);
+                pa.SetDamage(damage);
                 if (!target)
                 {
-                    p.GetComponent<Rigidbody>().AddForce(player.spellDirection.forward * 5, ForceMode.Impulse);
+                    Rigidbody rb = pa.GetComponent<Rigidbody>();
+                    rb.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    rb.GetComponent<Rigidbody>().AddForce(player.spellDirection.forward * speed, ForceMode.Impulse);
                 }
                 else
                 {
-                    p.GetComponent<HomingArc>().SeekTarget(target);
+                    pa.SetSpeed(speed);
+                    pa.SeekTargetArc(target, arcHeight, arcAngle, true);
                 }
             }
         }

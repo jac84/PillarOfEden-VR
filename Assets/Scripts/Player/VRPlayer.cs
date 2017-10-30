@@ -11,7 +11,8 @@ public class VRPlayer : MonoBehaviour
     [SerializeField] private PlayerHPMP playerBeads;
     [SerializeField] private VRTK_ControllerEvents controllerEvents;
     [SerializeField] private Spell[] availableSpells;
-    [SerializeField] private int spellIndex =0;
+    private int spellIndex = 0;
+    private bool shieldActivated;
     public Transform rightHandPosition;
     public Transform leftHandPosition;
     public Transform spellDirection;
@@ -27,8 +28,10 @@ public class VRPlayer : MonoBehaviour
             currentSpell.GetGesture().gameObject.SetActive(true);
         }
     }
-    public void UpdatePlayer()
+    private void Update()
     {
+        CheckShield();
+        playerBeads.UpdateHPMP();
     }
     public Spell GetCurrentSpell()
     {
@@ -55,7 +58,7 @@ public class VRPlayer : MonoBehaviour
     {
         if (availableSpells.Length > 0)
         {
-            if (spellIndex < availableSpells.Length -1)
+            if (spellIndex < availableSpells.Length - 1)
                 spellIndex++;
             else
                 spellIndex = 0;
@@ -63,6 +66,47 @@ public class VRPlayer : MonoBehaviour
             currentSpell.DeactivateSpell();
             currentSpell = availableSpells[spellIndex];
             currentSpell.GetGesture().gameObject.SetActive(true);
+        }
+    }
+    private void CheckShield()
+    {
+        if (controllerEvents != null && Camera.main)
+        {
+            Vector3 screenPoint = Camera.main.WorldToViewportPoint(controllerEvents.gameObject.transform.position);
+            Vector3 controllerRot = controllerEvents.gameObject.transform.localRotation.eulerAngles;
+            if ((screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1))
+            {
+                if (((controllerRot.x > 0 && controllerRot.x < 30) || (controllerRot.x > 330))
+                && (controllerRot.y > 30 && controllerRot.y < 160)
+                && (controllerRot.z > 110 && controllerRot.z < 260))
+                {
+                    if (!shieldActivated)
+                    {
+                        shieldActivated = true;
+                        playerBeads.SetCanTakeDamage(false);
+                        Debug.Log("Shield Activated");
+                        return;
+                    }
+                }
+                else
+                {
+                    if (shieldActivated)
+                    {
+                        shieldActivated = false;
+                        playerBeads.SetCanTakeDamage(true);
+                        Debug.Log("Shield Deactivated");
+                    }
+                }
+            }
+            else
+            {
+                if (shieldActivated)
+                {
+                    shieldActivated = false;
+                    playerBeads.SetCanTakeDamage(true);
+                    Debug.Log("Shield Deactivated");
+                }
+            }
         }
     }
     public GameObject GetTarget()

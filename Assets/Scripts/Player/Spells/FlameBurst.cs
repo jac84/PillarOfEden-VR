@@ -3,7 +3,8 @@ using System.Collections;
 
 public class FlameBurst : Spell
 {
-    private GameObject SpellObject;
+    private bool active;
+    private Prototype pa;
 
 
     public override void ActivateSpell()
@@ -15,18 +16,26 @@ public class FlameBurst : Spell
             {
                 Debug.Log("FlameBurst Spell Casted...");
                 player.GetBeads().SpendMana(MPCost);
-                if (!SpellObject)
+                if (!active)
                 {
                     if (GamManager.singleton.IsLeftHanded())
                     {
-                        SpellObject = Instantiate(projectile, player.leftHandPosition.position, player.leftHandPosition.rotation);
-                        SpellObject.transform.parent = player.leftHandPosition;
+                        pa = projectile.Instantiate<Prototype>();
+                        pa.gameObject.transform.GetChild(0).GetComponent<Cone>().SetDamage(damage);
+                        pa.gameObject.transform.position = player.leftHandPosition.position;
+                        pa.gameObject.transform.parent = player.leftHandPosition;
+                        pa.gameObject.transform.rotation = player.spellDirection.rotation;
                     }
                     else
                     {
-                        SpellObject = Instantiate(projectile, player.rightHandPosition.position, player.rightHandPosition.rotation);
-                        SpellObject.transform.parent = player.rightHandPosition;
+                        pa = projectile.Instantiate<Prototype>();
+                        pa.gameObject.transform.GetChild(0).GetComponent<Cone>().SetDamage(damage);
+                        pa.gameObject.transform.position = player.rightHandPosition.position;
+                        pa.gameObject.transform.parent = player.rightHandPosition;
+                        pa.gameObject.transform.rotation = player.spellDirection.rotation;
                     }
+                    
+                    active = true;
                 }
             }
         }
@@ -34,7 +43,10 @@ public class FlameBurst : Spell
 
     public override void DeactivateSpell()
     {
-        Destroy(SpellObject);
-        SpellObject = null;
+        if (active)
+        {
+            pa.ReturnToPool();
+            active = false;
+        }
     }
 }

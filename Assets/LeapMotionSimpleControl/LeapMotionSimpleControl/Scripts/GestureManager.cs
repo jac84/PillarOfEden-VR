@@ -99,9 +99,12 @@ namespace LeapMotionSimpleControl
         public BehaviorHand ActiveBehaviorHand;
         public void ResetHandOnExit()
         {
-            ActiveBehaviorHand.GetCounter().DelayReset = false;
-            ActiveBehaviorHand.ResetListHands();
-            Debug.Log("ResetHand");
+            if (ActiveBehaviorHand != null)
+            {
+                ActiveBehaviorHand.GetCounter().DelayReset = false;
+                ActiveBehaviorHand.ResetListHands();
+                Debug.Log("ResetHand");
+            }           
         }
 
         public virtual bool ReceiveEvent(GestureTypes type)

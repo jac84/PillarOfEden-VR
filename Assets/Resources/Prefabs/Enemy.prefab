@@ -24,8 +24,9 @@ GameObject:
   - component: {fileID: 23168436270101674}
   - component: {fileID: 54128599144966488}
   - component: {fileID: 114209952670566992}
-  - component: {fileID: 114189062005851346}
-  m_Layer: 0
+  - component: {fileID: 114985739880321752}
+  - component: {fileID: 114555091541624638}
+  m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,8 +40,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1964288729870230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.22, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.14, y: 0.86, z: -0.67}
+  m_LocalScale: {x: 0.3745088, y: 0.37450886, z: 0.37450886}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -58,7 +59,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 138c692db1eb6f34d8522aaa1e0b5b51, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,7 +112,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114189062005851346
+--- !u!114 &114209952670566992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1964288729870230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c29b4ca3187c642a17427c367ba2ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactable: {fileID: 114555091541624638}
+  dummyMove: {fileID: 114985739880321752}
+--- !u!114 &114555091541624638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1964288729870230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b983c64e0b33c4d9cb04381ec1d19a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114985739880321752
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -124,15 +149,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 54128599144966488}
   speed: 300
---- !u!114 &114209952670566992
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1964288729870230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c29b4ca3187c642a17427c367ba2ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dummyMove: {fileID: 114189062005851346}
