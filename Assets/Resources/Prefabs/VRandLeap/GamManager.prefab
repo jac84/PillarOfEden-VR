@@ -57,10 +57,10 @@ MonoBehaviour:
   LeftHanded: 0
   Network_Manager: {fileID: 114968926011982316}
   entity_manager: {fileID: 0}
-  spawnWait: 1
-  startWait: 5
+  spawnWait: 10
+  startWait: 2
   waveWait: 1
-  difficulty: 200
+  difficulty: 50
 --- !u!114 &114968926011982316
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -79,7 +79,7 @@ public class GamManager : Photon.MonoBehaviour
     //gamestart(Network_Manager.NetworkStatus(),difficulty) It should return a proper network status.
     public virtual void OnJoinedRoom()
     {
-        //gamestart(true, difficulty);
+        gamestart(true, difficulty);
     }
 
 }

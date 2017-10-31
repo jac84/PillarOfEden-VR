@@ -23,6 +23,7 @@ public abstract class BehaviorAbstract : MonoBehaviour
             protoType.ReturnToPool();
         }
     }
+    /**TODO Redo this*/
     protected virtual void OnTriggerStay(Collider other)
     {
         IHealth h = other.GetComponent<IHealth>();

@@ -32,19 +32,27 @@ public class CameraRayCaster : MonoBehaviour
     private void EyeRaycastTarget()
     {
         RaycastHit hit;
-        Vector3 screenPoint = Camera.main.WorldToViewportPoint(lastObjectInSights.transform.position);
-        if (!(screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1))
+        if (lastObjectInSights != null)
         {
-            LockedOn = false;
-            GamManager.singleton.player.SetTarget(null);
-            return;
-        }
-        if (Physics.Raycast(transform.position, (lastObjectInSights.transform.position - transform.position), out hit, m_RayLength))
-        {
-            m_Reticle.SetPosition(hit);
+            Vector3 screenPoint = Camera.main.WorldToViewportPoint(lastObjectInSights.transform.position);
+            if (!(screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1))
+            {
+                LockedOn = false;
+                GamManager.singleton.player.SetTarget(null);
+                return;
+            }
+            if (Physics.Raycast(transform.position, (lastObjectInSights.transform.position - transform.position), out hit, m_RayLength))
+            {
+                m_Reticle.SetPosition(hit);
+            }
+            else
+            {
+                LockedOn = false;
+            }
         }
         else
         {
+            GamManager.singleton.mainVRCamera.GetComponent<Reticle>().ChangeReticleColor(new Color(255, 255, 255));
             LockedOn = false;
         }
     }

@@ -6,6 +6,11 @@ public class Dummy : Enemy
 {
 
     public DummyMove dummyMove;
+
+    public override void Attack()
+    {
+    }
+
     public override void UpdateEnemyMovement()
     {
         if (dummyMove != null)
