@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using VRStandardAssets.Utils;
-public abstract class Enemy : MonoBehaviour, IEnemyAttack, IHealth
+using Photon;
+public abstract class Enemy : Photon.MonoBehaviour, IEnemyAttack, IHealth
 {
     /**Need to redo Entire Enemy structure*/
     [SerializeField] protected float damage;
@@ -30,28 +31,9 @@ public abstract class Enemy : MonoBehaviour, IEnemyAttack, IHealth
     {
         GamManager.singleton.mainVRCamera.GetComponent<Reticle>().ChangeReticleColor(new Color(255,255,255));
     }
-    private void Update()
+    private void Start()
     {
-        if(!path.target)
-        {
-            path.target = GamManager.singleton.player.transform;
-        }
-        if (currentTarget)
-        {
-            if (readyToAttack)
-            {
-                readyToAttack = false;
-                Attack();
-                nextAtkTime = Time.time + atkDelay;
-            }
-        }
-        if (!readyToAttack)
-        {
-            if (Time.time >= nextAtkTime)
-            {
-                readyToAttack = true;
-            }
-        }
+
     }
     public void TakeDamage(float amount)
     {
@@ -59,7 +41,7 @@ public abstract class Enemy : MonoBehaviour, IEnemyAttack, IHealth
         //Check If Dead
         if (currentHp <= 0)
         {
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
     public GameObject GetTarget()

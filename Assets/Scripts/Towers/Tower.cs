@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public abstract class Tower : MonoBehaviour, IHealth
+using Photon;
+public abstract class Tower : Photon.MonoBehaviour, IHealth
 {
     protected bool readyToAttack;
     protected float nextAtkTime;
@@ -16,9 +16,11 @@ public abstract class Tower : MonoBehaviour, IHealth
     [SerializeField] protected float bulletSpeed;
 
 
-    private void Awake()
+    private void Start()
     {
+        GamManager.singleton.GetTowerManager().AddTower(this);
         currentHP = maxHp;
+
     }
     public void TakeDamage(float amount)
     {
@@ -26,15 +28,11 @@ public abstract class Tower : MonoBehaviour, IHealth
         //Check If Dead
         if (currentHP <= 0)
         {
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 
-    protected void Update()
-    {
-        StartAttack();
-    }
-    protected void StartAttack()
+    public void StartAttack()
     {
         if (target)
         {

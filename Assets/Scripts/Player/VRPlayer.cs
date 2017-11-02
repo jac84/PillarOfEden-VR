@@ -27,6 +27,8 @@ public class VRPlayer : MonoBehaviour
             currentSpell = availableSpells[spellIndex];
             currentSpell.GetGesture().gameObject.SetActive(true);
         }
+        GamManager.singleton.mainVRCamera = spellDirection.gameObject.GetComponent<Camera>();
+        GamManager.singleton.player = gameObject.GetComponent<VRPlayer>();
     }
     private void Update()
     {

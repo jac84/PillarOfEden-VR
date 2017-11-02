@@ -15,7 +15,9 @@ public class GamManager : Photon.MonoBehaviour
     [SerializeField]
     private PhoManager Network_Manager;
     [SerializeField]
-    private EntityManager entity_manager;
+    private TowerManager towerManager;
+    [SerializeField]
+    private EnemyManager enemymanager;
     public float spawnWait;
     public float startWait;
     public float waveWait;
@@ -64,7 +66,7 @@ public class GamManager : Photon.MonoBehaviour
             return;
         }
         //such next gen.
-        StartCoroutine(entity_manager.SpawnWave(difficulty, spawnWait, startWait, waveWait, NetworkState));
+        StartCoroutine(enemymanager.SpawnWave(difficulty, spawnWait, startWait, waveWait, NetworkState));
     }
 
     //cleanup coroutines,kicks everyone off network.
@@ -80,6 +82,14 @@ public class GamManager : Photon.MonoBehaviour
     public virtual void OnJoinedRoom()
     {
         gamestart(true, difficulty);
+    }
+    public TowerManager GetTowerManager()
+    {
+        return towerManager;
+    }
+    public void SetTowerManager(TowerManager tw)
+    {
+        towerManager = tw;
     }
 
 }
