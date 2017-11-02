@@ -19,10 +19,17 @@ public class PlayerHPMP : MonoBehaviour, IHealth
     public bool canTakeDamage = true;
     private float genTime = 0;
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(float amount,Vector3 origin)
     {
         if (canTakeDamage)
         {
+            if(GamManager.singleton.player.GetShieldActivated())
+            {
+                Vector3 direction = origin - transform.position;
+                float dot = Vector3.Dot(direction, GamManager.singleton.mainVRCamera.transform.forward);
+                if (dot > .3)
+                    return;
+            }
             Debug.Log("Player Took Damage");
             healthPoints = healthPoints > amount ? healthPoints - amount : 0;
             hPBeads.UpdateBeads(healthPoints, maxHealthPoints);

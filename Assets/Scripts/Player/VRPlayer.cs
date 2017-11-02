@@ -6,18 +6,21 @@ using VRTK;
 public class VRPlayer : MonoBehaviour
 {
     // Use this for initialization
-    [SerializeField] private VRTK_BasicTeleport teleport;
     [SerializeField] private Spell currentSpell;
     [SerializeField] private PlayerHPMP playerBeads;
     [SerializeField] private VRTK_ControllerEvents controllerEvents;
     [SerializeField] private Spell[] availableSpells;
+    [SerializeField] private GameObject shield;
+    [Space(10)]
+    [SerializeField]
+    private GameObject Target;
+    
     private int spellIndex = 0;
     private bool shieldActivated;
     public Transform rightHandPosition;
     public Transform leftHandPosition;
     public Transform spellDirection;
 
-    [SerializeField] private GameObject Target;
 
     void Start()
     {
@@ -32,6 +35,7 @@ public class VRPlayer : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(GamManager.singleton.mainVRCamera.transform.forward);
         CheckShield();
         playerBeads.UpdateHPMP();
     }
@@ -53,7 +57,6 @@ public class VRPlayer : MonoBehaviour
 
     private void LockOn(object sender, ControllerInteractionEventArgs e)
     {
-        Debug.Log("TriggerPressed, Locking on...");
         Target = GamManager.singleton.mainVRCamera.GetComponent<CameraRayCaster>().LockOnEnemy();
     }
     private void CycleSpells(object sender, ControllerInteractionEventArgs e)
@@ -82,11 +85,11 @@ public class VRPlayer : MonoBehaviour
                 && (controllerRot.y > 30 && controllerRot.y < 160)
                 && (controllerRot.z > 110 && controllerRot.z < 260))
                 {
+                    playerBeads.SpendMana(.01f);
                     if (!shieldActivated)
                     {
                         shieldActivated = true;
-                        playerBeads.SetCanTakeDamage(false);
-                        Debug.Log("Shield Activated");
+                        shield.SetActive(shieldActivated);
                         return;
                     }
                 }
@@ -95,8 +98,7 @@ public class VRPlayer : MonoBehaviour
                     if (shieldActivated)
                     {
                         shieldActivated = false;
-                        playerBeads.SetCanTakeDamage(true);
-                        Debug.Log("Shield Deactivated");
+                        shield.SetActive(shieldActivated);
                     }
                 }
             }
@@ -105,8 +107,7 @@ public class VRPlayer : MonoBehaviour
                 if (shieldActivated)
                 {
                     shieldActivated = false;
-                    playerBeads.SetCanTakeDamage(true);
-                    Debug.Log("Shield Deactivated");
+                    shield.SetActive(shieldActivated);
                 }
             }
         }
@@ -118,5 +119,9 @@ public class VRPlayer : MonoBehaviour
     public void SetTarget(GameObject target)
     {
         Target = target;
+    }
+    public bool GetShieldActivated()
+    {
+        return shieldActivated;
     }
 }

@@ -10,7 +10,7 @@ public class SimpleEnemy : Enemy
         h = currentTarget.GetComponent<IHealth>();
         if (h != null)
         {
-            h.TakeDamage(damage);
+            h.TakeDamage(damage,transform.position);
             Debug.Log("Enemy Attacked");
         }
     }

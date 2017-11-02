@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IHealth {
 
 	
-	void TakeDamage(float amount);
+	void TakeDamage(float amount,Vector3 origin);
 }

@@ -22,7 +22,7 @@ public abstract class Tower : Photon.MonoBehaviour, IHealth
         currentHP = maxHp;
 
     }
-    public void TakeDamage(float amount)
+    public void TakeDamage(float amount,Vector3 origin)
     {
         currentHP -= amount;
         //Check If Dead

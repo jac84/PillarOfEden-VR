@@ -23,11 +23,8 @@ GameObject:
   - component: {fileID: 136745156014725274}
   - component: {fileID: 23416911335435342}
   - component: {fileID: 114278926414476642}
-  - component: {fileID: 114056299617187538}
-  - component: {fileID: 114858522089141226}
-  - component: {fileID: 114906529692798764}
-  - component: {fileID: 114724390691640600}
-  m_Layer: 11
+  - component: {fileID: 54587702376474448}
+  m_Layer: 12
   m_Name: CannonTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +62,7 @@ GameObject:
   - component: {fileID: 4560353276133372}
   - component: {fileID: 114593610127004962}
   - component: {fileID: 135050969588539672}
-  m_Layer: 12
+  m_Layer: 2
   m_Name: Sight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +163,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1359164784466418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.09, y: 1.28, z: -1.14}
+  m_LocalPosition: {x: -5.9, y: 1.28, z: 16.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4252119737938500}
@@ -293,6 +290,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1831586833603286}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54587702376474448
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1359164784466418}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!54 &54759893151723506
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -331,23 +343,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608f29d8dfd467e4180af780afaca85c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
   dieTime: 0.5
   protoType: {fileID: 114517504217552456}
   dieOnHit: 0
   Center: {fileID: 0}
   ExpansionRate: 2
   ExpansionVector: {x: 2, y: 2, z: 2}
---- !u!114 &114056299617187538
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1359164784466418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79b983c64e0b33c4d9cb04381ec1d19a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114187698010958598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -391,6 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcca237db16903a40a9cbde07b40b96c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
   dieTime: 5
   protoType: {fileID: 114187698010958598}
   dieOnHit: 1
@@ -423,43 +426,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tower: {fileID: 114278926414476642}
---- !u!114 &114724390691640600
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1359164784466418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c29b4ca3187c642a17427c367ba2ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactable: {fileID: 114906529692798764}
-  dummyMove: {fileID: 0}
---- !u!114 &114858522089141226
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1359164784466418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c29b4ca3187c642a17427c367ba2ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactable: {fileID: 114056299617187538}
-  dummyMove: {fileID: 0}
---- !u!114 &114906529692798764
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1359164784466418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79b983c64e0b33c4d9cb04381ec1d19a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &135050969588539672
 SphereCollider:
   m_ObjectHideFlags: 1

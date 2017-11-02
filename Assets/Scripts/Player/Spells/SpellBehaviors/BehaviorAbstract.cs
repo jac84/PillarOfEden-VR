@@ -29,7 +29,7 @@ public abstract class BehaviorAbstract : MonoBehaviour
         IHealth h = other.GetComponent<IHealth>();
         if(h != null)
         {
-            h.TakeDamage(damage);
+            h.TakeDamage(damage,transform.position);
         }
         if (dieOnHit)
         {

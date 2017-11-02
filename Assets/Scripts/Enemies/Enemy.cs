@@ -35,7 +35,7 @@ public abstract class Enemy : Photon.MonoBehaviour, IEnemyAttack, IHealth
     {
 
     }
-    public void TakeDamage(float amount)
+    public void TakeDamage(float amount,Vector3 origin)
     {
         currentHp -= amount;
         //Check If Dead

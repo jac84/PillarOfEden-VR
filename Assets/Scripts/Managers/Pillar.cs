@@ -15,7 +15,7 @@ public class Pillar : MonoBehaviour, IHealth
     {
         currentHp = MaxHp;
     }
-    public void TakeDamage(float amount)
+    public void TakeDamage(float amount,Vector3 origin)
     {
         if (canTakeDamage)
         {

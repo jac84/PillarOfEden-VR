@@ -8,7 +8,7 @@ public abstract class Spell : MonoBehaviour
     [Header("Spell Attributes")]
     [SerializeField] protected Prototype projectile;
     [SerializeField] protected VRPlayer player;
-    [SerializeField] protected int MPCost;
+    [SerializeField] protected float MPCost;
     [SerializeField] protected BehaviorHand handGesture;
     [SerializeField] protected float damage;
 
