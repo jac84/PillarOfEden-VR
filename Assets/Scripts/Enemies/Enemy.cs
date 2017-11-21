@@ -18,8 +18,11 @@ public abstract class Enemy : Photon.MonoBehaviour, IEnemyAttack, IHealth
     protected float nextAtkTime;
     void Awake()
     {
-        interactable.OnOver += HoverOver;
-        interactable.OnOut += HoverOut;
+        if (interactable != null)
+        {
+            interactable.OnOver += HoverOver;
+            interactable.OnOut += HoverOut;
+        }
     }
     
     //On HoverOver and HoverOut manipulate reticle

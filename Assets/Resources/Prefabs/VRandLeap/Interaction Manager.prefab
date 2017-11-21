@@ -93,7 +93,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4296704730211524
 Transform:
   m_ObjectHideFlags: 1
@@ -254,13 +254,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _modelsParent: {fileID: 0}
   ModelPool:
-  - GroupName: Graphics_Hands
-    _handPool: {fileID: 0}
+  - GroupName: LoPoly_Hands_Separate
+    _handPool: {fileID: 114102366415556432}
     LeftModel: {fileID: 0}
     IsLeftToBeSpawned: 0
     RightModel: {fileID: 0}
     IsRightToBeSpawned: 0
-    modelList: []
+    modelList:
+    - {fileID: 0}
+    - {fileID: 0}
     modelsCheckedOut: []
     IsEnabled: 1
     CanDuplicate: 0
@@ -327,7 +329,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionControllers:
     _values:
-    - {fileID: 114553116141909748}
     - {fileID: 114348919496145206}
   hoverActivationRadius: 0.2
   touchActivationRadius: 0.075
@@ -335,11 +336,11 @@ MonoBehaviour:
   _templateLayer:
     layerIndex: 0
   _interactionLayer:
-    layerIndex: 11
+    layerIndex: 15
   _interactionNoContactLayer:
-    layerIndex: 12
+    layerIndex: 16
   _contactBoneLayer:
-    layerIndex: 13
+    layerIndex: 17
   _drawControllerRuntimeGizmos: 0
 --- !u!114 &114832984000801792
 MonoBehaviour:

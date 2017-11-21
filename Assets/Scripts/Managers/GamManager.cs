@@ -18,11 +18,8 @@ public class GamManager : Photon.MonoBehaviour
     private TowerManager towerManager;
     [SerializeField]
     private EnemyManager enemymanager;
-    public float spawnWait;
-    public float startWait;
-    public float waveWait;
     private bool Gameready;
-    public int difficulty;
+
     
 
     public static GamManager singleton
@@ -57,20 +54,8 @@ public class GamManager : Photon.MonoBehaviour
     {
         return LeftHanded;
     }
-
-    void gamestart(bool NetworkState, int difficulty)
-    {
-        if (!NetworkState)
-        {
-            Debug.Log("Network state isn't ready");
-            return;
-        }
-        //such next gen.
-        StartCoroutine(enemymanager.SpawnWave(difficulty, spawnWait, startWait, waveWait, NetworkState));
-    }
-
     //cleanup coroutines,kicks everyone off network.
-    void gameover()
+    void GameOver()
     {
         StopAllCoroutines();
         PhotonNetwork.CloseConnection(PhotonNetwork.player);
@@ -79,9 +64,18 @@ public class GamManager : Photon.MonoBehaviour
 
     //This here is a test. When running this function please use 
     //gamestart(Network_Manager.NetworkStatus(),difficulty) It should return a proper network status.
+    void GameStart(bool NetworkState, int difficulty)
+    {
+        if (!NetworkState)
+        {
+            Debug.Log("Network state isn't ready");
+            return;
+        }
+        //such next gen.
+    }
     public virtual void OnJoinedRoom()
     {
-        gamestart(true, difficulty);
+
     }
     public TowerManager GetTowerManager()
     {
@@ -91,5 +85,8 @@ public class GamManager : Photon.MonoBehaviour
     {
         towerManager = tw;
     }
-
+    public EnemyManager GetEnemyManager()
+    {
+        return enemymanager;
+    }
 }

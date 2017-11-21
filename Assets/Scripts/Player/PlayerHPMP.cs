@@ -9,16 +9,23 @@ public class PlayerHPMP : MonoBehaviour, IHealth
     [SerializeField] private float maxHealthPoints;
     [SerializeField] private float manaPoints;
     [SerializeField] private float maxManaPoints;
-
+    [Space(10)]
     [SerializeField] private float invTime;
     [SerializeField] private UpdateBracelet hPBeads;
     [SerializeField] private UpdateBracelet manaBeads;
     [SerializeField] private float hpRegenRatePerSec;
     [SerializeField] private float manaRegenRatePerSec;
 
+    [Space(10)]
+    [SerializeField] private float shieldDamageMitigationPercentage;
+
     public bool canTakeDamage = true;
     private float genTime = 0;
-
+    private void Awake()
+    {
+        healthPoints = maxHealthPoints;
+        manaPoints = maxManaPoints;
+    }
     public void TakeDamage(float amount,Vector3 origin)
     {
         if (canTakeDamage)
@@ -27,8 +34,15 @@ public class PlayerHPMP : MonoBehaviour, IHealth
             {
                 Vector3 direction = origin - transform.position;
                 float dot = Vector3.Dot(direction, GamManager.singleton.mainVRCamera.transform.forward);
-                if (dot > .3)
+                if (dot > .8)
+                {
+                    Debug.Log("Shield hit");
+                    float d = amount * (shieldDamageMitigationPercentage / 100);
+                    healthPoints = healthPoints > d ? healthPoints - d : 0;
+                    hPBeads.UpdateBeads(healthPoints, maxHealthPoints);
+
                     return;
+                }
             }
             Debug.Log("Player Took Damage");
             healthPoints = healthPoints > amount ? healthPoints - amount : 0;
@@ -82,15 +96,21 @@ public class PlayerHPMP : MonoBehaviour, IHealth
     private void RegenerateMana(float amount)
     {
         manaPoints = manaPoints + amount >= maxManaPoints ? maxManaPoints : manaPoints + amount;
+        manaBeads.UpdateBeads(manaPoints, maxManaPoints);
     }
     private void RegenerateHealth(float amount)
     {
         healthPoints = healthPoints + amount >= maxHealthPoints ? maxHealthPoints : healthPoints + amount;
+        hPBeads.UpdateBeads(healthPoints, maxHealthPoints);
     }
     private IEnumerator Invincible(float waitTime)
     {
         canTakeDamage = false;
         yield return new WaitForSeconds(waitTime);
         canTakeDamage = true;
+    }
+    public void SetHp(float Hp)
+    {
+        healthPoints = Hp;
     }
 }

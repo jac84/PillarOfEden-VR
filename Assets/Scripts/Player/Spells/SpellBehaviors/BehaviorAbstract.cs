@@ -9,6 +9,7 @@ public abstract class BehaviorAbstract : MonoBehaviour
     [SerializeField] private float dieTime;
     [SerializeField] protected Prototype protoType;
     [SerializeField] protected bool dieOnHit;
+    [SerializeField] protected GameObject owner;
 
     private void Start()
     {
@@ -27,13 +28,16 @@ public abstract class BehaviorAbstract : MonoBehaviour
     protected virtual void OnTriggerStay(Collider other)
     {
         IHealth h = other.GetComponent<IHealth>();
-        if(h != null)
+        if (other.gameObject != owner)
         {
-            h.TakeDamage(damage,transform.position);
-        }
-        if (dieOnHit)
-        {
-            protoType.ReturnToPool();
+            if (h != null)
+            {
+                h.TakeDamage(damage, transform.position);
+            }
+            if (dieOnHit)
+            {
+                protoType.ReturnToPool();
+            }
         }
     }
     protected virtual void Set()
@@ -48,4 +52,9 @@ public abstract class BehaviorAbstract : MonoBehaviour
     {
         damage = d;
     }
+    public void SetOwner(GameObject o)
+    {
+        owner = o;
+    }
+
 }

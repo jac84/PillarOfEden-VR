@@ -14,7 +14,7 @@ namespace LeapMotionSimpleControl
         protected void Awake()
         {
             base.Awake();
-            CurrentType = GestureManager.GestureTypes.PointDown;
+            //CurrentType = GestureManager.GestureTypes.PointDown;
             // add your custom event 
             specificEvent = castSpell;
             //_gestureManager.TimeBetween2Gestures = 1;

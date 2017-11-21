@@ -32,6 +32,7 @@ public class ArcaneMissile : Spell {
                 }
                 pa.SetDieTime(10.0f);
                 pa.SetDamage(damage);
+                pa.SetOwner(transform.parent.parent.gameObject);
                 if (!target)
                 {
                     Rigidbody rb = pa.GetComponent<Rigidbody>();

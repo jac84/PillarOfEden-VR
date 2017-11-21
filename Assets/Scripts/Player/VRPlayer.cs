@@ -14,9 +14,14 @@ public class VRPlayer : MonoBehaviour
     [Space(10)]
     [SerializeField]
     private GameObject Target;
-    
+
+    [Space(10)]
+    [SerializeField]
+    private PlayerInventory playerInventory;
+
     private int spellIndex = 0;
     private bool shieldActivated;
+    private bool inventoryOpen;
     public Transform rightHandPosition;
     public Transform leftHandPosition;
     public Transform spellDirection;
@@ -35,9 +40,8 @@ public class VRPlayer : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(GamManager.singleton.mainVRCamera.transform.forward);
         CheckShield();
-        playerBeads.UpdateHPMP();
+        CheckInventory();
     }
     public Spell GetCurrentSpell()
     {
@@ -53,8 +57,16 @@ public class VRPlayer : MonoBehaviour
     {
         controllerEvents.GripPressed += new ControllerInteractionEventHandler(LockOn);
         controllerEvents.TriggerPressed += new ControllerInteractionEventHandler(CycleSpells);
+        controllerEvents.ButtonOnePressed += new ControllerInteractionEventHandler(HandleButtonOnePress);
     }
 
+    private void HandleButtonOnePress(object sender, ControllerInteractionEventArgs e)
+    {
+        if(inventoryOpen)
+        {
+            playerInventory.UseCurrentItem();
+        }
+    }
     private void LockOn(object sender, ControllerInteractionEventArgs e)
     {
         Target = GamManager.singleton.mainVRCamera.GetComponent<CameraRayCaster>().LockOnEnemy();
@@ -78,12 +90,11 @@ public class VRPlayer : MonoBehaviour
         if (controllerEvents != null && Camera.main)
         {
             Vector3 screenPoint = Camera.main.WorldToViewportPoint(controllerEvents.gameObject.transform.position);
-            Vector3 controllerRot = controllerEvents.gameObject.transform.localRotation.eulerAngles;
+            Vector3 controllerRot = controllerEvents.gameObject.transform.forward;       
             if ((screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1))
             {
-                if (((controllerRot.x > 0 && controllerRot.x < 30) || (controllerRot.x > 330))
-                && (controllerRot.y > 30 && controllerRot.y < 160)
-                && (controllerRot.z > 110 && controllerRot.z < 260))
+                if (((controllerEvents.gameObject.transform.forward - GamManager.singleton.mainVRCamera.gameObject.transform.right).sqrMagnitude < 0.3f) &&
+                    ((controllerEvents.gameObject.transform.right - GamManager.singleton.mainVRCamera.gameObject.transform.forward).sqrMagnitude < 0.3f))
                 {
                     playerBeads.SpendMana(.01f);
                     if (!shieldActivated)
@@ -108,6 +119,44 @@ public class VRPlayer : MonoBehaviour
                 {
                     shieldActivated = false;
                     shield.SetActive(shieldActivated);
+                }
+            }
+        }
+    }
+
+    private void CheckInventory()
+    {
+        if (controllerEvents != null && Camera.main)
+        {
+            Vector3 screenPoint = Camera.main.WorldToViewportPoint(controllerEvents.gameObject.transform.position);
+            if ((screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1))
+            {
+                if ((controllerEvents.gameObject.transform.right - GamManager.singleton.mainVRCamera.gameObject.transform.up).sqrMagnitude < 0.3f)
+                {
+                    if (!inventoryOpen && playerInventory.GetItemCount() > 0)
+                    {
+                        inventoryOpen = playerInventory.OpenInventory();
+                    }
+                    else
+                    {
+                        if (controllerEvents.GetTouchpadAxis().x > 0 && controllerEvents.touchpadAxisChanged)
+                        {
+                            playerInventory.NextItemInInventory();
+                        }
+                        else if (controllerEvents.GetTouchpadAxis().x < 0 && controllerEvents.touchpadAxisChanged)
+                        {
+                            playerInventory.PreviousItemInInventory();
+                        }
+                    }
+                }
+                else
+                {
+                    if (inventoryOpen)
+                    {
+                        inventoryOpen = false;
+                        playerInventory.CloseInventory();
+                        Debug.Log("Inventory Closed");
+                    }
                 }
             }
         }

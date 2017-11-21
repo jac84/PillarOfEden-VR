@@ -17,7 +17,6 @@ namespace LeapMotionSimpleControl
 
         public enum GestureTypes
         {
-            PointDown,
             HandsOpenHold,
             SwipingLeft,
             HandsOpen,
