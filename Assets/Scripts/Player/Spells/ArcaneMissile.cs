@@ -15,8 +15,9 @@ public class ArcaneMissile : Spell {
         {
             if (spell.GetType() == typeof(ArcaneMissile))
             {
+                if (!player.GetBeads().SpendMana(MPCost))
+                    return;
                 Debug.Log("ArcaneMissile spell casted...");
-                player.GetBeads().SpendMana(MPCost);
                 GameObject target;
                 ProjectileArc pa;
                 target = player.GetTarget();

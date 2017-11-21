@@ -30,6 +30,10 @@ public class Wave : MonoBehaviour
             {
                 yield return new WaitForSeconds(waitBeforeSpawningNextThreshold);
             }
+            else
+            {
+                GamManager.singleton.GetRoundManager().IncrementSpawnFinished();
+            }
         }
     }
 }

@@ -17,6 +17,7 @@ public class RoundManager : MonoBehaviour
 
     private List<Transform> spawnPoints = new List<Transform>();
 
+    public int spawnPointsFinished = 0;
     int currentRound = 0;
     int currentWave = 0;
     private int counter;
@@ -39,6 +40,10 @@ public class RoundManager : MonoBehaviour
         {
             //Condition to Spawn next wave
             if(Input.GetKeyUp(KeyCode.Space))
+            {
+                GamManager.singleton.GetEnemyManager().DespawnEnemy(GamManager.singleton.GetEnemyManager().GetLastEnemySpawned());
+            }
+            if(spawnPointsFinished >= spawnPoints.Count && GamManager.singleton.GetEnemyManager().GetEnemyCount() <= 0)
             {
                 if (currentWave < maxWaves)
                 {
@@ -72,6 +77,7 @@ public class RoundManager : MonoBehaviour
     }
     public void SpawnWave(int waveNumber)
     {
+        spawnPointsFinished = 0;
         GamManager.singleton.GetEnemyManager().EnemyCleanup();
         Debug.Log("Wave " + currentWave + ":  Spawned!");
         foreach (Transform t in spawnPoints)
@@ -82,5 +88,9 @@ public class RoundManager : MonoBehaviour
     public void StopRound()
     {
         roundStart = false;
+    }
+    public void IncrementSpawnFinished()
+    {
+        spawnPointsFinished++;
     }
 }

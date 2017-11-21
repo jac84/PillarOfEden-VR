@@ -7,7 +7,6 @@ namespace LeapMotionSimpleControl
     public class HandsOpen : BehaviorHand
     {
         public Spell assignedSpell;
-
         private PrerequisiteSpell containsPrerequisite = null;
 
         // Use this for initialization

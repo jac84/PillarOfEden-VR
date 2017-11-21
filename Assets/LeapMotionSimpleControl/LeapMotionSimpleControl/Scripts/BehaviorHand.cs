@@ -15,6 +15,7 @@ namespace LeapMotionSimpleControl
     public class BehaviorHand : MonoBehaviour
     {
         [SerializeField] protected bool _prerequisiteMet;
+        [SerializeField] private int timeBetweenGestures;
 
         Transform player;
         public void SetPlayerTransform(Transform t)
@@ -197,7 +198,11 @@ namespace LeapMotionSimpleControl
         {
             _listHands.Clear();
         }
-
+        public void ChangeTimeBetweenGestures()
+        {
+                _gestureManager.ChangeTimeBetweenGestures(timeBetweenGestures);
+                _counterLoading.StopTimer();
+        }
         #endregion
 
         #region Debug

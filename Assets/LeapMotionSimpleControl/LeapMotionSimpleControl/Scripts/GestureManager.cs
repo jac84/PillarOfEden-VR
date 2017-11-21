@@ -125,7 +125,10 @@ namespace LeapMotionSimpleControl
             BehaviorHand behavior = (BehaviorHand)_listActiveGestures[type];
             behavior.UnBlockGesture();
         }
-
+        public void ChangeTimeBetweenGestures(int t)
+        {
+            TimeBetween2Gestures = t;
+        }
         public virtual void LoadingGestureProgress(GestureTypes type, float percent)
         {
 

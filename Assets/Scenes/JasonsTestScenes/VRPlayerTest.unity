@@ -1156,6 +1156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prerequisiteMet: 1
+  timeBetweenGestures: 0
   CurrentType: 2
   CheckingTimeBeforeToggle: 0
   deltaCloseFinger: 0.05
@@ -1327,6 +1328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prerequisiteMet: 0
+  timeBetweenGestures: 1
   CurrentType: 0
   CheckingTimeBeforeToggle: 1.5
   deltaCloseFinger: 0.05
@@ -1950,6 +1952,7 @@ MonoBehaviour:
   Network_Manager: {fileID: 705391212}
   towerManager: {fileID: 1120984346}
   enemymanager: {fileID: 2069075374}
+  roundmanager: {fileID: 1865267817}
 --- !u!1 &305551926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1981,6 +1984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prerequisiteMet: 0
+  timeBetweenGestures: 1
   CurrentType: 1
   CheckingTimeBeforeToggle: 0
   deltaCloseFinger: 0.05
@@ -3259,7 +3263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &705391212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5779,7 +5783,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1189256449}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.66, z: 0}
+  m_LocalPosition: {x: 0, y: 0.66, z: 0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1921863929}
@@ -8438,7 +8442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1865267816
 Transform:
   m_ObjectHideFlags: 0
@@ -8469,8 +8473,9 @@ MonoBehaviour:
   maxWaves: 3
   maxRounds: 2
   roundGracePeriodSeconds: 5
-  groupThreshold: 10
-  waitBeforeSpawningNextThreshold: 1
+  groupThreshold: 3
+  waitBeforeSpawningNextThreshold: 3
+  spawnPointsFinished: 0
 --- !u!114 &1865423575
 MonoBehaviour:
   m_ObjectHideFlags: 0

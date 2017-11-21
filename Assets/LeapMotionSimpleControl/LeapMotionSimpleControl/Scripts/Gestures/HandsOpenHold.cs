@@ -9,7 +9,6 @@ namespace LeapMotionSimpleControl
     public class HandsOpenHold : BehaviorHand
     {
         public Spell assignedSpell;
-
         private PrerequisiteSpell containsPrerequisite = null;
         private bool ResetTimer = false;
         private bool Activated = false;

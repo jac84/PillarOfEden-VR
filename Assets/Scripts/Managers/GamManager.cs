@@ -18,6 +18,8 @@ public class GamManager : Photon.MonoBehaviour
     private TowerManager towerManager;
     [SerializeField]
     private EnemyManager enemymanager;
+    [SerializeField]
+    private RoundManager roundmanager;
     private bool Gameready;
 
     
@@ -88,5 +90,9 @@ public class GamManager : Photon.MonoBehaviour
     public EnemyManager GetEnemyManager()
     {
         return enemymanager;
+    }
+    public RoundManager GetRoundManager()
+    {
+        return roundmanager;
     }
 }

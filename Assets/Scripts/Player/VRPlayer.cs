@@ -42,6 +42,7 @@ public class VRPlayer : MonoBehaviour
     {
         CheckShield();
         CheckInventory();
+        playerBeads.UpdateHPMP();
     }
     public Spell GetCurrentSpell()
     {
@@ -83,6 +84,7 @@ public class VRPlayer : MonoBehaviour
             currentSpell.DeactivateSpell();
             currentSpell = availableSpells[spellIndex];
             currentSpell.GetGesture().gameObject.SetActive(true);
+            currentSpell.GetGesture().ChangeTimeBetweenGestures();
         }
     }
     private void CheckShield()

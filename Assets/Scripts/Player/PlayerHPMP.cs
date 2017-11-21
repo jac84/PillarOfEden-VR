@@ -88,10 +88,13 @@ public class PlayerHPMP : MonoBehaviour, IHealth
     {
         return (int)((manaPoints / maxManaPoints) * 100);
     }
-    public void SpendMana(float amount)
+    public bool SpendMana(float amount)
     {
+        if (amount > manaPoints)
+            return false;
         manaPoints = manaPoints > amount ? manaPoints - amount : 0;
         manaBeads.UpdateBeads(manaPoints, maxManaPoints);
+        return true;
     }
     private void RegenerateMana(float amount)
     {

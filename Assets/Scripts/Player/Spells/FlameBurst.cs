@@ -14,8 +14,9 @@ public class FlameBurst : Spell
         {
             if (spell.GetType() == typeof(FlameBurst))
             {
+                if (!player.GetBeads().SpendMana(MPCost))
+                    return;
                 Debug.Log("FlameBurst Spell Casted...");
-                player.GetBeads().SpendMana(MPCost);
                 if (!active)
                 {
                     if (GamManager.singleton.IsLeftHanded())

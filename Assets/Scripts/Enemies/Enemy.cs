@@ -44,7 +44,7 @@ public abstract class Enemy : Photon.MonoBehaviour, IEnemyAttack, IHealth
         //Check If Dead
         if (currentHp <= 0)
         {
-            PhotonNetwork.Destroy(gameObject);
+            GamManager.singleton.GetEnemyManager().DespawnEnemy(gameObject);
         }
     }
     public GameObject GetTarget()
