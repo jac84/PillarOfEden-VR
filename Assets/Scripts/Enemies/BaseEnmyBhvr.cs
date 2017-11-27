@@ -8,6 +8,7 @@ public class BaseEnmyBhvr : MonoBehaviour {
     public float range;
     public float meleeRange;
     public int damage;
+    public float targetCallibration;
 
     private Transform self;
     private Transform myTarget;  
@@ -32,6 +33,13 @@ public class BaseEnmyBhvr : MonoBehaviour {
             // Deal damage to the target equal to damage var
             // Something like, myTarget.GetComponent<SomeScript>().takeDamage(damage) or whatever will work
         }
+
+        // Once the pathChange happens, it will then compare the distance to a targetCallibratoin variable for when to
+        // repath by itself, essentially a distance threshold to repath when passed.
+        if (pathChange && (distFromMe > targetCallibration))
+        {
+            myPath.SearchPath();
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -40,8 +48,11 @@ public class BaseEnmyBhvr : MonoBehaviour {
         if (bruh.name == "Player" && pathChange == false) // We will need to refactor some things, such as setting tags for the player object
         {                           // and also tags for the tower object it should make the 
             myPath.target = potTarget;
+            myTarget = potTarget;
             myPath.repathRate = 1.0f; // Because the player can teleport, our enemies tracking the player will need to track them faster
             pathChange = true;
+            myPath.SearchPath();
         }
     }
+    
 }
