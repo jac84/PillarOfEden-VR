@@ -4942,6 +4942,26 @@ Prefab:
       propertyPath: rangedAtks
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114540334315933274, guid: 27699d7cb1d0ce44aad800a6cadb4861,
+        type: 2}
+      propertyPath: repathRate
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114540334315933274, guid: 27699d7cb1d0ce44aad800a6cadb4861,
+        type: 2}
+      propertyPath: canSearch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114689488076708714, guid: 27699d7cb1d0ce44aad800a6cadb4861,
+        type: 2}
+      propertyPath: startEndModifier.useGraphRaycasting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114689488076708714, guid: 27699d7cb1d0ce44aad800a6cadb4861,
+        type: 2}
+      propertyPath: startEndModifier.useRaycasting
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27699d7cb1d0ce44aad800a6cadb4861, type: 2}
   m_IsPrefabParent: 0
