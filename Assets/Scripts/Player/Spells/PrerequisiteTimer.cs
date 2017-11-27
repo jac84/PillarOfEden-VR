@@ -16,11 +16,9 @@ public class PrerequisiteTimer : Counter
         {
             if (checkCondition())
             {
-                Debug.Log("Timer Started...");
                 prerequisiteMet = true;
                 StartTimer(maxTime, () =>
                  {
-                     Debug.Log("Timer Ended...");
                      prerequisiteMet = false;
                  });
             }
@@ -34,7 +32,6 @@ public class PrerequisiteTimer : Counter
     }
     public void Reset()
     {
-        Debug.Log("Timer Reset...");
         prerequisiteMet = false;
         StopTimer();   
     }

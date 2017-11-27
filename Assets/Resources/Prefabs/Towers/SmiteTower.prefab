@@ -274,6 +274,7 @@ MonoBehaviour:
   dieTime: 0.5
   protoType: {fileID: 114636973818969992}
   dieOnHit: 0
+  owner: {fileID: 0}
 --- !u!114 &114897141919236938
 MonoBehaviour:
   m_ObjectHideFlags: 1

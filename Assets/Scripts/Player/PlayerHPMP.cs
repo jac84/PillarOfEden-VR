@@ -116,4 +116,8 @@ public class PlayerHPMP : MonoBehaviour, IHealth
     {
         healthPoints = Hp;
     }
+    public float GetMana()
+    {
+        return manaPoints;
+    }
 }

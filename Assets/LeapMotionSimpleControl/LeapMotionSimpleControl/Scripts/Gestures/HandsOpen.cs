@@ -57,7 +57,6 @@ namespace LeapMotionSimpleControl
         }
         void castSpell()
         {
-            Debug.Log("Arcane Missile Gesture Cast");
             assignedSpell.ActivateSpell();
             _prerequisiteMet = false;
         }

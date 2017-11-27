@@ -89,7 +89,6 @@ namespace LeapMotionSimpleControl
         }
         private void castSpell()
         {
-                Debug.Log("Spell is being cast");
                 assignedSpell.ActivateSpell();
         }
     }

@@ -95,4 +95,8 @@ public class GamManager : Photon.MonoBehaviour
     {
         return roundmanager;
     }
+    public VRPlayer GetVRPlayer()
+    {
+        return player;
+    }
 }

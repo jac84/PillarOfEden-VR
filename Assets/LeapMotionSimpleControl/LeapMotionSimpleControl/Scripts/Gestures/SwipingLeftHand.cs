@@ -32,7 +32,6 @@ namespace LeapMotionSimpleControl
 		}
 
 		void onSwipeEvent(){
-			Debug.Log("Gust Spell Gesture Cast");
             assignedSpell.ActivateSpell();
         }
 	}

@@ -22,7 +22,9 @@ public class InteractableObject : MonoBehaviour {
         m_IsOver = true;
 
         if (OnOver != null)
-            OnOver();
+        {
+            OnOver();           
+        }
     }
     public void Out()
     {

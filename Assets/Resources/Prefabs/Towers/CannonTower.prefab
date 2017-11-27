@@ -347,6 +347,7 @@ MonoBehaviour:
   dieTime: 0.5
   protoType: {fileID: 114517504217552456}
   dieOnHit: 0
+  owner: {fileID: 0}
   Center: {fileID: 0}
   ExpansionRate: 2
   ExpansionVector: {x: 2, y: 2, z: 2}
@@ -397,6 +398,7 @@ MonoBehaviour:
   dieTime: 5
   protoType: {fileID: 114187698010958598}
   dieOnHit: 1
+  owner: {fileID: 0}
   aoeObject: {fileID: 114517504217552456}
   expansionVector: {x: 3, y: 1, z: 3}
   expansionRate: 2

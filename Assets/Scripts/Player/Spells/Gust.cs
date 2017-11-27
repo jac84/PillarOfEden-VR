@@ -18,7 +18,6 @@ public class Gust : Spell
             {
                 if (!player.GetBeads().SpendMana(MPCost))
                     return;
-                Debug.Log("Gust Spell Casted...");               
                 AoEGrow pa;
                 if (GamManager.singleton.IsLeftHanded())
                 {

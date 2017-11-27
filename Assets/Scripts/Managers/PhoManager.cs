@@ -29,8 +29,8 @@ public class PhoManager : Photon.MonoBehaviour {
     public virtual void OnJoinedRoom()
     {
         //networkstatus = true;
-        PlayerObj = PhotonNetwork.Instantiate("Player", new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), 0);
-        PlayerObj.GetComponent<PhotonView>().owner.NickName = "V.R Player";
+        //PlayerObj = PhotonNetwork.Instantiate("Player", new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), 0);
+        //PlayerObj.GetComponent<PhotonView>().owner.NickName = "V.R Player";
     }
     
     public virtual void OnLeftRoom()
