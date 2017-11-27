@@ -101,6 +101,7 @@ MonoBehaviour:
   range: 10
   meleeRange: 5
   damage: 1
+  targetCallibration: 10
 --- !u!114 &114540334315933274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -119,7 +120,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   centerOffset: 1
   rotationIn2D: 0
-  repathRate: 1000
+  repathRate: 100
   target: {fileID: 0}
   canSearch: 1
   canMove: 1
@@ -168,11 +169,11 @@ MonoBehaviour:
     addPoints: 0
     exactStartPoint: 1
     exactEndPoint: 4
-    useRaycasting: 0
+    useRaycasting: 1
     mask:
       serializedVersion: 2
       m_Bits: 0
-    useGraphRaycasting: 0
+    useGraphRaycasting: 1
   traversableTags: -1
   traversableTagsCompatibility:
     tagsChange: -1

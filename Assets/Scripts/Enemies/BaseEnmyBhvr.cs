@@ -11,11 +11,15 @@ public class BaseEnmyBhvr : MonoBehaviour {
     public float targetCallibration;
 
     private Transform self;
-    private Transform myTarget;  
+    private Transform myTarget;
+    private Vector3 lastBestPosition;
+    private Vector3 queryNewPosition;
     private AIPath myPath;
     private SphereCollider myCollide;
     private bool pathChange;
     private float distFromMe;
+    private float distFromLast;
+
 	// Use this for initialization
 	void Start () {
         myPath = GetComponent<AIPath>();
@@ -36,9 +40,19 @@ public class BaseEnmyBhvr : MonoBehaviour {
 
         // Once the pathChange happens, it will then compare the distance to a targetCallibratoin variable for when to
         // repath by itself, essentially a distance threshold to repath when passed.
+        // Turns out I completely overlooked this, since this will continually run infinitley if VR-Player gets too far away.
         if (pathChange && (distFromMe > targetCallibration))
         {
-            myPath.SearchPath();
+            queryNewPosition = myTarget.position;
+            distFromLast = Vector3.Distance(lastBestPosition, queryNewPosition);
+            // New fix, should be what Zak suggested and compare the last known position of the target and the current location
+            // if that is greater than the threshold along with being further away from the enemy, then repath. So more conditions 
+            // should allow it to play out smoother. Ran a quick test with more enemies, and it seemed to not get stuck for me.
+            if (distFromLast > targetCallibration)
+            {
+                lastBestPosition = myTarget.position;
+                myPath.SearchPath();
+            }
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -50,6 +64,7 @@ public class BaseEnmyBhvr : MonoBehaviour {
             Debug.Log("ASD");
             myPath.target = potTarget;
             myTarget = potTarget;
+            lastBestPosition = myTarget.position;
             myPath.repathRate = 1.0f; // Because the player can teleport, our enemies tracking the player will need to track them faster
             pathChange = true;
             myPath.SearchPath();
