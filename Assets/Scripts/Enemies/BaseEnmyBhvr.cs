@@ -45,8 +45,9 @@ public class BaseEnmyBhvr : MonoBehaviour {
     {
         GameObject bruh = other.gameObject;       
         Transform potTarget = other.gameObject.GetComponent<Transform>();
-        if (bruh.name == "Player" && pathChange == false) // We will need to refactor some things, such as setting tags for the player object
+        if (bruh.tag == "Player" && pathChange == false) // We will need to refactor some things, such as setting tags for the player object
         {                           // and also tags for the tower object it should make the 
+            Debug.Log("ASD");
             myPath.target = potTarget;
             myTarget = potTarget;
             myPath.repathRate = 1.0f; // Because the player can teleport, our enemies tracking the player will need to track them faster
