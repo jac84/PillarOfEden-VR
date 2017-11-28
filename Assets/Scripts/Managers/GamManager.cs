@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Pathfinding;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class GamManager : Photon.MonoBehaviour
     [SerializeField] private bool LeftHanded = false;
     [SerializeField] private PhoManager Network_Manager;
     [SerializeField] private EntityManager entity_manager;
+    [SerializeField] private GameObject AStarGrid;
     private bool Gameready;
     public int difficulty;
     public static GamManager singleton
@@ -54,7 +56,10 @@ public class GamManager : Photon.MonoBehaviour
     {
         return LeftHanded;
     }
-
+    public GameObject GetAStarGrid()
+    {
+        return AStarGrid;
+    }
 
 
 }

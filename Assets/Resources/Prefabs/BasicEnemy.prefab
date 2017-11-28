@@ -27,7 +27,8 @@ GameObject:
   - component: {fileID: 114540334315933274}
   - component: {fileID: 135279650694254560}
   - component: {fileID: 114033438632482934}
-  m_Layer: 2
+  - component: {fileID: 114698609026652308}
+  m_Layer: 11
   m_Name: BasicEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1079492051543240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60, y: 1.344594, z: 0}
+  m_LocalPosition: {x: 54.58, y: 1.344594, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,11 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e4ac0b19bf1c4740a219d213a86ceba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangedAtks: 1
-  range: 10
-  meleeRange: 5
-  damage: 1
-  targetCallibration: 10
+  targetCallibration: 15
+  enemyAttack: {fileID: 114698609026652308}
 --- !u!114 &114540334315933274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,6 +177,20 @@ MonoBehaviour:
     tagsChange: -1
     tagsSet: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+--- !u!114 &114698609026652308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1079492051543240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d6630e46c856864a8e221c6b5c64c4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  attackSpeed: 2
+  attackRange: 10
 --- !u!135 &135279650694254560
 SphereCollider:
   m_ObjectHideFlags: 1

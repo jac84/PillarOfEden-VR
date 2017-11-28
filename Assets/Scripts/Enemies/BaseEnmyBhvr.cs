@@ -4,42 +4,44 @@ using UnityEngine;
 
 public class BaseEnmyBhvr : MonoBehaviour {
 
-    public bool rangedAtks;
-    public float range;
-    public float meleeRange;
-    public int damage;
-    public float targetCallibration;
-
+    private float range;
+    [SerializeField] private float targetCallibration;
+    [SerializeField] private float sightRadius;
     private Transform self;
     private Transform myTarget;
     private Vector3 lastBestPosition;
     private Vector3 queryNewPosition;
     private AIPath myPath;
-    private SphereCollider myCollide;
     private bool pathChange;
     private float distFromMe;
     private float distFromLast;
+    [SerializeField] protected BaseEnemyAttack enemyAttack;
     private float myStartSpeed;
 
 	// Use this for initialization
 	void Start () {
         myPath = GetComponent<AIPath>();
         myStartSpeed = myPath.speed;
-        myCollide = GetComponent<SphereCollider>();
         pathChange = false;
         myTarget = myPath.target;
         self = GetComponent<Transform>();
-	}
+        range = enemyAttack.GetAttackRange();
+    }
 
     void Update()
     {
         distFromMe = Vector3.Distance(self.position, myTarget.position);
-        if ((rangedAtks && distFromMe < range) || distFromMe < meleeRange )
+        if (distFromMe < range)
         {
-            // Deal damage to the target equal to damage var
-            // Something like, myTarget.GetComponent<SomeScript>().takeDamage(damage) or whatever will work
+            if(enemyAttack)
+                enemyAttack.Attack(myTarget.gameObject);
         }
 
+        if ((distFromMe < sightRadius) && myPath.speed > 0)
+        {
+            myPath.speed = 0;
+        }
+        else { myPath.speed = myStartSpeed; }
         // Once the pathChange happens, it will then compare the distance to a targetCallibratoin variable for when to
         // repath by itself, essentially a distance threshold to repath when passed.
         // Turns out I completely overlooked this, since this will continually run infinitley if VR-Player gets too far away.
@@ -52,22 +54,18 @@ public class BaseEnmyBhvr : MonoBehaviour {
             // should allow it to play out smoother. Ran a quick test with more enemies, and it seemed to not get stuck for me.
             if (distFromLast > targetCallibration)
             {
-                myPath.speed = myStartSpeed;
+                // myPath.speed = myStartSpeed;
                 lastBestPosition = myTarget.position;
                 myPath.SearchPath();
             }
         }
-        if ((distFromMe < myCollide.radius) && myPath.speed > 0)
-        {
-            myPath.speed = 0;
-        }
-        else { myPath.speed = myStartSpeed; }
+        
     }
-    private void OnTriggerEnter(Collider other)
+    public void OnEnterSight(Collider other)
     {
         GameObject bruh = other.gameObject;       
         Transform potTarget = other.gameObject.GetComponent<Transform>();
-        if (bruh.name == "Player" && pathChange == false) // We will need to refactor some things, such as setting tags for the player object
+        if (bruh.tag == "Player" && pathChange == false) // We will need to refactor some things, such as setting tags for the player object
         {                           // and also tags for the tower object it should make the 
             myPath.target = potTarget;
             myTarget = potTarget;
@@ -78,11 +76,11 @@ public class BaseEnmyBhvr : MonoBehaviour {
             myPath.SearchPath();
         }
     }
-    private void OnTriggerExit(Collider other)
+    public void OnExitSight(Collider other)
     {
         GameObject bruh = other.gameObject;
         Transform potTarget = other.gameObject.GetComponent<Transform>();
-        if (bruh.name == "Player" && pathChange == true)
+        if (bruh.tag == "Player" && pathChange == true)
         {
             myPath.speed = myStartSpeed;
         }
