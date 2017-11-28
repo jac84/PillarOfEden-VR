@@ -34,6 +34,12 @@ public class VRPlayer : MonoBehaviour
         {
             currentSpell = availableSpells[spellIndex];
             currentSpell.GetGesture().gameObject.SetActive(true);
+            if (!GamManager.singleton.IsLeftHanded())
+            {
+                Debug.Log(rightHandPosition.parent.parent.parent.GetChild(1).name);
+                rightHandPosition.parent.parent.parent.GetChild(1).GetComponent<SkinnedMeshRenderer>().material = currentSpell.GetHandMaterial();
+            }
+
         }
         GamManager.singleton.mainVRCamera = spellDirection.gameObject.GetComponent<Camera>();
         GamManager.singleton.player = gameObject.GetComponent<VRPlayer>();
@@ -85,6 +91,10 @@ public class VRPlayer : MonoBehaviour
             currentSpell = availableSpells[spellIndex];
             currentSpell.GetGesture().gameObject.SetActive(true);
             currentSpell.GetGesture().ChangeTimeBetweenGestures();
+            if(!GamManager.singleton.IsLeftHanded())
+            {
+                rightHandPosition.parent.parent.parent.GetChild(1).GetComponent<SkinnedMeshRenderer>().material = currentSpell.GetHandMaterial();
+            }
         }
     }
     private void CheckShield()

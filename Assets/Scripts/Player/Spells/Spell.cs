@@ -11,11 +11,16 @@ public abstract class Spell : MonoBehaviour
     [SerializeField] protected float MPCost;
     [SerializeField] protected BehaviorHand handGesture;
     [SerializeField] protected float damage;
+    [SerializeField] protected Material handMaterial;
 
     public abstract void ActivateSpell();
     public abstract void DeactivateSpell();
     public BehaviorHand GetGesture()
     {
         return handGesture;
+    }
+    public Material GetHandMaterial()
+    {
+        return handMaterial;
     }
 }

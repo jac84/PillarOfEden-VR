@@ -108,7 +108,8 @@ public class CameraRayCaster : MonoBehaviour
     {
         if (currentInteractible && !LockedOn)
         {
-            Enemy enemy = currentInteractible.GetComponent<Enemy>();
+            //TODO:
+            BaseEnmyBhvr enemy = currentInteractible.GetComponent<BaseEnmyBhvr>();
             if (enemy)
             {
                 LockedOn = true;

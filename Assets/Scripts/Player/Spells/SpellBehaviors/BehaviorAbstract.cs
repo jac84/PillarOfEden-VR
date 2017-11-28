@@ -10,6 +10,7 @@ public abstract class BehaviorAbstract : MonoBehaviour
     [SerializeField] protected Prototype protoType;
     [SerializeField] protected bool dieOnHit;
     [SerializeField] protected GameObject owner;
+    [SerializeField] protected LayerMask ignoreLayer;
 
     private void Start()
     {
@@ -34,7 +35,7 @@ public abstract class BehaviorAbstract : MonoBehaviour
             {
                 h.TakeDamage(damage, transform.position);
             }
-            if (dieOnHit)
+            if (dieOnHit && ((1 << other.gameObject.layer) & ignoreLayer) == 0)
             {
                 protoType.ReturnToPool();
             }

@@ -1817,7 +1817,7 @@ GameObject:
   - component: {fileID: 114166649125788004}
   m_Layer: 14
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2466,7 +2466,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1991050185235556}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 42, y: 0.66, z: 12.12}
+  m_LocalPosition: {x: 42, y: 1, z: 10.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4001976482943478}
@@ -3354,7 +3354,7 @@ Camera:
   field of view: 96.092
   orthographic: 0
   orthographic size: 5
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -4588,8 +4588,8 @@ MonoBehaviour:
   invTime: 1
   hPBeads: {fileID: 114897262046074812}
   manaBeads: {fileID: 114622307592511742}
-  hpRegenRatePerSec: 5
-  manaRegenRatePerSec: 5
+  hpRegenRatePerSec: 0
+  manaRegenRatePerSec: 0
   shieldDamageMitigationPercentage: 0
   canTakeDamage: 1
 --- !u!114 &114067464601109792
@@ -4790,6 +4790,7 @@ MonoBehaviour:
   MPCost: 10
   handGesture: {fileID: 114550396497799194}
   damage: 35
+  handMaterial: {fileID: 0}
   arcAngle: 0.7
   arcHeight: 5
   speed: 30
@@ -4835,6 +4836,8 @@ MonoBehaviour:
   MPCost: 10
   handGesture: {fileID: 0}
   damage: 0
+  handMaterial: {fileID: 0}
+  pointer: {fileID: 114463564009708776}
 --- !u!114 &114181146024661018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5175,6 +5178,7 @@ MonoBehaviour:
   MPCost: 1
   handGesture: {fileID: 114658234586171610}
   damage: 1
+  handMaterial: {fileID: 0}
 --- !u!114 &114297417215066362
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5434,7 +5438,7 @@ MonoBehaviour:
   m_Camera: {fileID: 4306961121717434}
   m_ExclusionLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4
   m_Reticle: {fileID: 114156998538270908}
   m_RayLength: 500
   currentInteractible: {fileID: 0}
@@ -6031,6 +6035,9 @@ MonoBehaviour:
   protoType: {fileID: 114181146024661018}
   dieOnHit: 0
   owner: {fileID: 0}
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &114930062084105432
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6047,6 +6054,7 @@ MonoBehaviour:
   MPCost: 10
   handGesture: {fileID: 114799444019841410}
   damage: 50
+  handMaterial: {fileID: 0}
   AoEDuration: 1
   ExapnsionVector: {x: 8, y: 8, z: 8}
   ExapnsionRate: 300
@@ -6078,6 +6086,9 @@ MonoBehaviour:
   protoType: {fileID: 114938219997696724}
   dieOnHit: 0
   owner: {fileID: 0}
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
   Center: {fileID: 0}
   ExpansionRate: 10
   ExpansionVector: {x: 5, y: 5, z: 5}
@@ -6133,6 +6144,9 @@ MonoBehaviour:
   protoType: {fileID: 114828409954995136}
   dieOnHit: 1
   owner: {fileID: 0}
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
   target: {fileID: 0}
   speed: 2
   IsHoming: 1
