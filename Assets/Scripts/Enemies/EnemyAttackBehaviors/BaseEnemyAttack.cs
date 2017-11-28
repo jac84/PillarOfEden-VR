@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BaseEnemyAttack : MonoBehaviour
 {
-    [SerializeField] protected int damage;
+    [SerializeField] protected float damage;
     [SerializeField] protected float attackSpeed;
     [SerializeField] protected float attackRange;
 
@@ -11,6 +11,7 @@ public class BaseEnemyAttack : MonoBehaviour
     private void Start()
     {
         lastTimeAttacked = Time.time;
+
     }
     public virtual void Attack(GameObject target)
     {
@@ -18,10 +19,11 @@ public class BaseEnemyAttack : MonoBehaviour
         {
             Debug.Log("Enemy is Attacking Player");
             IHealth hp = null;
+            Debug.Log(target.name);
             hp = target.GetComponent<IHealth>();
             if (hp != null)
             {
-                hp.TakeDamage(damage);
+                hp.TakeDamage(damage,transform.position);
             }
             lastTimeAttacked = Time.time + attackSpeed;
         }

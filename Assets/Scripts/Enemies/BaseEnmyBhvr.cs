@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class BaseEnmyBhvr : MonoBehaviour {
+using VRStandardAssets.Utils;
+public class BaseEnmyBhvr : MonoBehaviour
+{
 
     private float range;
     [SerializeField] private float targetCallibration;
@@ -12,15 +13,26 @@ public class BaseEnmyBhvr : MonoBehaviour {
     private Vector3 lastBestPosition;
     private Vector3 queryNewPosition;
     private AIPath myPath;
-    [SerializeField] private SphereCollider myCollide;
+    private SphereCollider myCollide;
     private bool pathChange;
     private float distFromMe;
     private float distFromLast;
     [SerializeField] protected BaseEnemyAttack enemyAttack;
+    [SerializeField] private InteractableObject interactable;
+
     private float myStartSpeed;
 
-	// Use this for initialization
-	void Start () {
+    public void HoverOver()
+    {
+        GamManager.singleton.mainVRCamera.GetComponent<Reticle>().ChangeReticleColor(new Color(200, 0, 0));
+    }
+    public void HoverOut()
+    {
+        GamManager.singleton.mainVRCamera.GetComponent<Reticle>().ChangeReticleColor(new Color(255, 255, 255));
+    }
+    // Use this for initialization
+    void Start()
+    {
         myPath = GetComponent<AIPath>();
         myStartSpeed = myPath.speed;
         myCollide = GetComponent<SphereCollider>();
@@ -28,7 +40,11 @@ public class BaseEnmyBhvr : MonoBehaviour {
         myTarget = myPath.target;
         self = GetComponent<Transform>();
         range = enemyAttack.GetAttackRange();
-
+        if (interactable != null)
+        {
+            interactable.OnOver += HoverOver;
+            interactable.OnOut += HoverOut;
+        }
     }
 
     void Update()
@@ -36,7 +52,7 @@ public class BaseEnmyBhvr : MonoBehaviour {
         distFromMe = Vector3.Distance(self.position, myTarget.position);
         if (distFromMe < range)
         {
-            if(enemyAttack)
+            if (enemyAttack)
                 enemyAttack.Attack(myTarget.gameObject);
         }
 
@@ -57,26 +73,9 @@ public class BaseEnmyBhvr : MonoBehaviour {
             }
         }
     }
-    public void SetTarget(Transform t)
+    private void OnTriggerEnter(Collider other)
     {
-        myPath.target = t;
-        myTarget = t;
-        myPath.repathRate = 1.0f; // Because the player can teleport, our enemies tracking the player will need to track them faster
-        pathChange = true;
-
-    }
-    public AIPath GetAIPath()
-    {
-        return myPath;
-    }
-    public bool GetPathChange()
-    {
-        return pathChange;
-    }
-    public void SetPathChange(bool b)
-    {
-        pathChange = b;
-        GameObject bruh = other.gameObject;       
+        GameObject bruh = other.gameObject;
         Transform potTarget = other.gameObject.GetComponent<Transform>();
         if (bruh.tag == "Player" && pathChange == false) // We will need to refactor some things, such as setting tags for the player object
         {                           // and also tags for the tower object it should make the 

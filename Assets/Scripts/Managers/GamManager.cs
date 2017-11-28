@@ -21,8 +21,6 @@ public class GamManager : Photon.MonoBehaviour
     private EnemyManager enemymanager;
     [SerializeField]
     private RoundManager roundmanager;
-    [SerializeField] private bool LeftHanded = false;
-    [SerializeField] private PhoManager Network_Manager;
     [SerializeField] private EntityManager entity_manager;
     [SerializeField] private GameObject AStarGrid;
     private bool Gameready;
