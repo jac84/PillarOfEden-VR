@@ -115,7 +115,7 @@ public class AIPath : AIBase {
 	protected Vector3 targetPoint;
 
 	protected Vector3 velocity;
-
+    private BaseEnmyBhvr myBehavior;
 	/** Rotation speed.
 	 * \deprecated This field has been renamed to #rotationSpeed and is now in degrees per second instead of a damping factor.
 	 */
@@ -198,11 +198,12 @@ public class AIPath : AIBase {
 	}
 
 	public virtual void OnTargetReached () {
-		// The end of the path has been reached.
-		// If you want custom logic for when the AI has reached it's destination
-		// add it here.
-		// You can also create a new script which inherits from this one
-		// and override the function in that script
+        // The end of the path has been reached.
+        // If you want custom logic for when the AI has reached it's destination
+        // add it here.
+        // You can also create a new script which inherits from this one
+        // and override the function in that script
+        myBehavior.TargetReached();
 	}
 
 	/** Called when a requested path has finished calculation.

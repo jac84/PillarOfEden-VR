@@ -28650,6 +28650,61 @@ Transform:
   m_Father: {fileID: 1757049148}
   m_RootOrder: 60
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1865166378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1865166379}
+  - component: {fileID: 1865166381}
+  - component: {fileID: 1865166380}
+  m_Layer: 11
+  m_Name: EnemySight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1865166379
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1865166378}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1960047195}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1865166380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1865166378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5981e221045bffc4a8d0f276f9b1200c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myCollide: {fileID: 1865166381}
+  myBehave: {fileID: 1960047194}
+--- !u!135 &1865166381
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1865166378}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1868977756
 GameObject:
   m_ObjectHideFlags: 0
@@ -29301,10 +29356,29 @@ Prefab:
       propertyPath: m_Name
       value: BasicEnemy
       objectReference: {fileID: 0}
+<<<<<<< HEAD
+=======
+    - target: {fileID: 114033438632482934, guid: 27699d7cb1d0ce44aad800a6cadb4861,
+        type: 2}
+      propertyPath: sightRadius
+      value: 5
+      objectReference: {fileID: 0}
+>>>>>>> 2cdc0fb232902bb7f876834242d7ae8e8d3ecddd
     m_RemovedComponents:
     - {fileID: 135279650694254560, guid: 27699d7cb1d0ce44aad800a6cadb4861, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 27699d7cb1d0ce44aad800a6cadb4861, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1960047194 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114033438632482934, guid: 27699d7cb1d0ce44aad800a6cadb4861,
+    type: 2}
+  m_PrefabInternal: {fileID: 1960047193}
+  m_Script: {fileID: 11500000, guid: 1e4ac0b19bf1c4740a219d213a86ceba, type: 3}
+--- !u!4 &1960047195 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4543397969741774, guid: 27699d7cb1d0ce44aad800a6cadb4861,
+    type: 2}
+  m_PrefabInternal: {fileID: 1960047193}
 --- !u!43 &1973363972
 Mesh:
   m_ObjectHideFlags: 0
