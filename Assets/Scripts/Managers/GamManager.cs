@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Pathfinding;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,10 @@ public class GamManager : Photon.MonoBehaviour
     private EnemyManager enemymanager;
     [SerializeField]
     private RoundManager roundmanager;
+    [SerializeField] private bool LeftHanded = false;
+    [SerializeField] private PhoManager Network_Manager;
+    [SerializeField] private EntityManager entity_manager;
+    [SerializeField] private GameObject AStarGrid;
     private bool Gameready;
 
     
@@ -75,6 +80,11 @@ public class GamManager : Photon.MonoBehaviour
         }
         //such next gen.
     }
+    public GameObject GetAStarGrid()
+    {
+        return AStarGrid;
+    }
+
     public virtual void OnJoinedRoom()
     {
 
