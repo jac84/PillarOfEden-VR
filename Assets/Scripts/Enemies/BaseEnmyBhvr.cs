@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class BaseEnmyBhvr : MonoBehaviour {
 
-    public bool rangedAtks;
-    public float range;
-    public float meleeRange;
-    public int damage;
-    public float targetCallibration;
+    private float range;
+    [SerializeField] private float targetCallibration;
 
     private Transform self;
     private Transform myTarget;
@@ -19,6 +16,7 @@ public class BaseEnmyBhvr : MonoBehaviour {
     private bool pathChange;
     private float distFromMe;
     private float distFromLast;
+    [SerializeField] protected BaseEnemyAttack enemyAttack;
 
 	// Use this for initialization
 	void Start () {
@@ -27,15 +25,17 @@ public class BaseEnmyBhvr : MonoBehaviour {
         pathChange = false;
         myTarget = myPath.target;
         self = GetComponent<Transform>();
-	}
+        range = enemyAttack.GetAttackRange();
+
+    }
 
     void Update()
     {
         distFromMe = Vector3.Distance(self.position, myTarget.position);
-        if ((rangedAtks && distFromMe < range) || distFromMe < meleeRange )
+        if (distFromMe < range)
         {
-            // Deal damage to the target equal to damage var
-            // Something like, myTarget.GetComponent<SomeScript>().takeDamage(damage) or whatever will work
+            if(enemyAttack)
+                enemyAttack.Attack(myTarget.gameObject);
         }
 
         // Once the pathChange happens, it will then compare the distance to a targetCallibratoin variable for when to
@@ -61,7 +61,6 @@ public class BaseEnmyBhvr : MonoBehaviour {
         Transform potTarget = other.gameObject.GetComponent<Transform>();
         if (bruh.tag == "Player" && pathChange == false) // We will need to refactor some things, such as setting tags for the player object
         {                           // and also tags for the tower object it should make the 
-            Debug.Log("ASD");
             myPath.target = potTarget;
             myTarget = potTarget;
             lastBestPosition = myTarget.position;
