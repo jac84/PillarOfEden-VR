@@ -52,10 +52,16 @@ public class BaseEnmyBhvr : MonoBehaviour {
             // should allow it to play out smoother. Ran a quick test with more enemies, and it seemed to not get stuck for me.
             if (distFromLast > targetCallibration)
             {
+                myPath.speed = myStartSpeed;
                 lastBestPosition = myTarget.position;
                 myPath.SearchPath();
             }
         }
+        if ((distFromMe < myCollide.radius) && myPath.speed > 0)
+        {
+            myPath.speed = 0;
+        }
+        else { myPath.speed = myStartSpeed; }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -76,9 +82,13 @@ public class BaseEnmyBhvr : MonoBehaviour {
     {
         GameObject bruh = other.gameObject;
         Transform potTarget = other.gameObject.GetComponent<Transform>();
-        if (bruh.name == "Player" && pathChange == true) 
+        if (bruh.name == "Player" && pathChange == true)
         {
             myPath.speed = myStartSpeed;
         }
-
+    }
+    public void TargetReached()
+    {
+        myPath.speed = 0;
+    }
 }
