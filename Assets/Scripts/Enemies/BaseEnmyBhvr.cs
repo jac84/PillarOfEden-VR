@@ -17,10 +17,12 @@ public class BaseEnmyBhvr : MonoBehaviour {
     private float distFromMe;
     private float distFromLast;
     [SerializeField] protected BaseEnemyAttack enemyAttack;
+    private float myStartSpeed;
 
 	// Use this for initialization
 	void Start () {
         myPath = GetComponent<AIPath>();
+        myStartSpeed = myPath.speed;
         myCollide = GetComponent<SphereCollider>();
         pathChange = false;
         myTarget = myPath.target;
@@ -65,9 +67,18 @@ public class BaseEnmyBhvr : MonoBehaviour {
             myTarget = potTarget;
             lastBestPosition = myTarget.position;
             myPath.repathRate = 1.0f; // Because the player can teleport, our enemies tracking the player will need to track them faster
+            myPath.speed = 0;
             pathChange = true;
             myPath.SearchPath();
         }
     }
-    
+    private void OnTriggerExit(Collider other)
+    {
+        GameObject bruh = other.gameObject;
+        Transform potTarget = other.gameObject.GetComponent<Transform>();
+        if (bruh.tag == "Player" && pathChange == true)
+        {
+            myPath.speed = myStartSpeed;
+        }
+    }
 }
