@@ -30,7 +30,6 @@ public class PhoManager : Photon.MonoBehaviour {
     {
         networkstatus = true;
         PlayerObj = PhotonNetwork.Instantiate("PlayerPhotonViewObject", GamManager.singleton.playerStartPosition.position,Quaternion.identity,0);
-        GamManager.singleton.player = PlayerObj.GetComponentInChildren<VRPlayer>();
         PlayerObj.GetComponent<PhotonView>().owner.NickName = "V.R Player";
     }
     

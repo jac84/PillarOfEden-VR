@@ -16,6 +16,8 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private float waitBeforeSpawningNextThreshold;
 
     private List<Transform> spawnPoints = new List<Transform>();
+    private List<IEnumerator> spawnCoroutines = new List<IEnumerator>();
+    private IEnumerator roundStartCoroutine;
 
     public int spawnPointsFinished = 0;
     int currentRound = 0;
@@ -38,10 +40,6 @@ public class RoundManager : MonoBehaviour
         if(roundStart)
         {
             //Condition to Spawn next wave
-            if(Input.GetKeyUp(KeyCode.Space))
-            {
-                GamManager.singleton.GetEnemyManager().DespawnEnemy(GamManager.singleton.GetEnemyManager().GetLastEnemySpawned());
-            }
             if(spawnPointsFinished >= spawnPoints.Count && GamManager.singleton.GetEnemyManager().GetEnemyCount() <= 0)
             {
                 if (currentWave < maxWaves)
@@ -55,6 +53,7 @@ public class RoundManager : MonoBehaviour
                     {
                         currentRound++;
                         roundStart = false;
+                        roundStartCoroutine = StartRound(currentRound);
                         StartCoroutine(StartRound(currentRound));
                     }
                     else
@@ -65,16 +64,25 @@ public class RoundManager : MonoBehaviour
     }
     public void StartSpawn()
     {
-        if(!roundStart)
+        if (!roundStart)
+        {
+            roundStartCoroutine = StartRound(1);
             StartCoroutine(StartRound(1));
+        }
     }
     public void RestartRoundManager()
     {
+        StopCoroutine(roundStartCoroutine);
+        foreach(IEnumerator e in spawnCoroutines)
+        {
+            StopCoroutine(e);
+        }
+        spawnCoroutines.Clear();
         roundStart = false;
         currentRound = 1;
         spawnPointsFinished = 0;
-         currentRound = 0;
-         currentWave = 0;
+        currentRound = 0;
+        currentWave = 0;
 }
     // Update is called once per frame
     IEnumerator StartRound(int round)
@@ -90,11 +98,15 @@ public class RoundManager : MonoBehaviour
     public void SpawnWave(int waveNumber)
     {
         spawnPointsFinished = 0;
+        spawnCoroutines.Clear();
+        int i = 0;
         GamManager.singleton.GetEnemyManager().EnemyCleanup();
         Debug.Log("Wave " + currentWave + ":  Spawned!");
         foreach (Transform t in spawnPoints)
         {
-            StartCoroutine(t.GetChild(currentRound - 1).GetChild(currentWave - 1).GetComponent<Wave>().SpawnWave(groupThreshold, waitBeforeSpawningNextThreshold));
+            spawnCoroutines.Add(t.GetChild(currentRound - 1).GetChild(currentWave - 1).GetComponent<Wave>().SpawnWave(groupThreshold, waitBeforeSpawningNextThreshold));
+            StartCoroutine(spawnCoroutines[i]);
+            i++;
         }
     }
     public void StopRound()
@@ -105,4 +117,5 @@ public class RoundManager : MonoBehaviour
     {
         spawnPointsFinished++;
     }
+
 }

@@ -88,8 +88,10 @@ public class GamManager : Photon.MonoBehaviour
     {
         roundmanager.RestartRoundManager();
         enemymanager.EnemyCleanup();
+        towerManager.TowerCleanUp();
+
         player.ResetPlayer();
-        player.transform.position = playerStartPosition.position;
+        player.transform.parent.position = playerStartPosition.position;
         pillar.ResetPillar();
     }
     //This here is a test. When running this function please use 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Wave : MonoBehaviour
 {
     public List<string> Monsters;
-    private int currentIndex = 0;
+    [SerializeField] private int currentIndex = 0;
 
     public IEnumerator SpawnWave(int threshold, float waitBeforeSpawningNextThreshold)
     {
@@ -33,6 +33,7 @@ public class Wave : MonoBehaviour
             else
             {
                 GamManager.singleton.GetRoundManager().IncrementSpawnFinished();
+                currentIndex = 0;
             }
         }
     }
