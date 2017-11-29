@@ -1094,6 +1094,7 @@ GameObject:
   - component: {fileID: 114637232871608854}
   - component: {fileID: 114792965976535974}
   - component: {fileID: 114697668052138582}
+  - component: {fileID: 114394164050585918}
   m_Layer: 0
   m_Name: CenterEyeAnchor
   m_TagString: MainCamera
@@ -2950,7 +2951,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1497662249142494}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 43.2, y: 1, z: 10.8}
+  m_LocalPosition: {x: 56.1, y: 1, z: 4.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4428059590196734}
@@ -4530,7 +4531,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 36
+    m_Bits: 2084
   target: {fileID: 0}
   speed: 2
   IsHoming: 1
@@ -4953,6 +4954,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcd03e00992e084c8be61565d44b8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114394164050585918
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1633588950587914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: bf03a07c3ebdf524d9ea7a1b197660df, type: 2}
 --- !u!114 &114418229540835134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4991,8 +5004,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cff17ffdf48507499ef7daaab9db40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 1000
-  maxHealthPoints: 1000
+  healthPoints: 1
+  maxHealthPoints: 1
   manaPoints: 1e+10
   maxManaPoints: 1e+14
   invTime: 1
@@ -5963,7 +5976,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 36
+    m_Bits: 2084
 --- !u!114 &114861419547360322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6265,10 +6278,10 @@ MonoBehaviour:
   dieTime: 2
   protoType: {fileID: 114684654687647704}
   dieOnHit: 0
-  owner: {fileID: 0}
+  owner: {fileID: 1497662249142494}
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 36
+    m_Bits: 2084
   Center: {fileID: 0}
   ExpansionRate: 10
   ExpansionVector: {x: 5, y: 5, z: 5}

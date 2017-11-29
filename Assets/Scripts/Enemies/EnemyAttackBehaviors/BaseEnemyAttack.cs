@@ -22,7 +22,7 @@ public class BaseEnemyAttack : MonoBehaviour
         if (lastTimeAttacked < Time.time)
         {
             OnTriggerAoE proj = projectile.Instantiate<OnTriggerAoE>();
-            proj.transform.parent = null;
+            proj.transform.parent = GamManager.singleton.poolManager.transform;
             proj.transform.position = projectileStart.position;
             proj.SetDamage(damage);
             proj.gameObject.GetComponent<Rigidbody>().velocity = Cannon.BallisticVel(target.transform, shootAngle, transform, bulletSpeed);

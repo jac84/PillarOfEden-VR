@@ -20,6 +20,7 @@ public class AoEGrow : BehaviorAbstract
     }
     private void Start()
     {
+        transform.parent = GamManager.singleton.poolManager.transform;
         startSize = transform.localScale;
         if (Center)
             transform.position = new Vector3(Center.position.x,

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Pathfinding;
 using Leap.Unity;
+using UnityEngine.PostProcessing;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +23,7 @@ public class GamManager : Photon.MonoBehaviour
     private EnemyManager enemymanager;
     [SerializeField]
     private RoundManager roundmanager;
+    public GameObject poolManager;
     [SerializeField]
     public Transform playerStartPosition;
     [SerializeField]
@@ -58,6 +60,11 @@ public class GamManager : Photon.MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        var behaviour = mainVRCamera.GetComponent<PostProcessingBehaviour>();
+        if (behaviour.profile != null)
+        {
+            behaviour.profile.colorGrading.enabled = false;
+        }
         if (Network_Manager != null)
             Network_Manager.AutoConnect("test");
 
@@ -78,14 +85,29 @@ public class GamManager : Photon.MonoBehaviour
         return LeftHanded;
     }
     //cleanup coroutines,kicks everyone off network.
-    void GameOver()
+    public void GameOver()
     {
+        var behaviour = mainVRCamera.GetComponent<PostProcessingBehaviour>();
+        if (behaviour.profile != null)
+        {
+            behaviour.profile.colorGrading.enabled = true;
+        }
         StopAllCoroutines();
+        enemymanager.EnemyCleanup();
+        towerManager.TowerCleanUp();
+        roundmanager.RestartRoundManager();
         PhotonNetwork.CloseConnection(PhotonNetwork.player);
         PhotonNetwork.Disconnect();
     }
     public void RestartGame()
     {
+        ClearPool();
+        PhotonNetwork.Reconnect();
+        var behaviour = mainVRCamera.GetComponent<PostProcessingBehaviour>();
+        if (behaviour.profile != null)
+        {
+            behaviour.profile.colorGrading.enabled = false;
+        }
         roundmanager.RestartRoundManager();
         enemymanager.EnemyCleanup();
         towerManager.TowerCleanUp();
@@ -145,5 +167,12 @@ public class GamManager : Photon.MonoBehaviour
     public void SetLeapServiceProvider(LeapProvider s)
     {
         leapServiceProvider = s;
+    }
+    public void ClearPool()
+    {
+        foreach(Transform o in poolManager.transform.GetChildren())
+        {
+            Destroy(o.gameObject);
+        }
     }
 }

@@ -23,6 +23,10 @@ public class Pillar : MonoBehaviour, IHealth
             currentHp = currentHp - amount <= 0 ? 0 : currentHp - amount;
             HealthBar.fillAmount = ((currentHp / MaxHp));
             StartCoroutine(Invincible(invTime));
+            if(currentHp <= 0)
+            {
+                GamManager.singleton.GameOver();
+            }
         }
     }
     private IEnumerator Invincible(float waitTime)

@@ -36,21 +36,18 @@ public class PlayerHPMP : MonoBehaviour, IHealth
                 float dot = Vector3.Dot(direction, GamManager.singleton.mainVRCamera.transform.forward);
                 if (dot > .8)
                 {
-                    Debug.Log("Shield hit");
                     float d = amount * (shieldDamageMitigationPercentage / 100);
                     healthPoints = healthPoints > d ? healthPoints - d : 0;
                     hPBeads.UpdateBeads(healthPoints, maxHealthPoints);
-
                     return;
                 }
             }
-            Debug.Log("Player Took Damage");
             healthPoints = healthPoints > amount ? healthPoints - amount : 0;
             hPBeads.UpdateBeads(healthPoints, maxHealthPoints);
             //Check If Dead
             if (healthPoints <= 0)
             {
-
+                GamManager.singleton.GameOver();
             }
             StartCoroutine(Invincible(invTime));
         }
