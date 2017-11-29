@@ -120,4 +120,11 @@ public class PlayerHPMP : MonoBehaviour, IHealth
     {
         return manaPoints;
     }
+    public void ResetBeads()
+    {
+        healthPoints = maxHealthPoints;
+        manaPoints = maxManaPoints;
+        hPBeads.UpdateBeads(healthPoints, maxHealthPoints);
+        manaBeads.UpdateBeads(manaPoints, maxManaPoints);
+    }
 }

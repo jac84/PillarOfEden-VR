@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Photon;
 public class TowerManager : Photon.MonoBehaviour
 {
-    [SerializeField] private List<Tower> listOfTowers= new List<Tower>();
+    [SerializeField] private List<Tower> listOfTowers = new List<Tower>();
 
     public void AddTower(Tower tower)
     {
@@ -23,6 +23,13 @@ public class TowerManager : Photon.MonoBehaviour
             {
                 tower.StartAttack();
             }
+        }
+    }
+    public void TowerCleanUp()
+    {
+        foreach(Tower t in listOfTowers)
+        {
+            RemoveTower(t);
         }
     }
 }

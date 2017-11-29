@@ -13,6 +13,9 @@ public abstract class Enemy : Photon.MonoBehaviour, IEnemyAttack, IHealth
     [SerializeField] protected GameObject currentTarget;
     [SerializeField] private InteractableObject interactable;
     [SerializeField] private AIPath path;
+    [SerializeField] private float invTime;
+
+    private bool canTakeDamage;
 
     protected bool readyToAttack;
     protected float nextAtkTime;
@@ -34,13 +37,23 @@ public abstract class Enemy : Photon.MonoBehaviour, IEnemyAttack, IHealth
         }
     }
     public void TakeDamage(float amount,Vector3 origin)
-    {
-        currentHp -= amount;
+    {        
         //Check If Dead
-        if (currentHp <= 0)
+        if (canTakeDamage)
+        {
+            currentHp -= amount;
+            StartCoroutine(Invincible(invTime));
+        }
+            if (currentHp <= 0)
         {
             GamManager.singleton.GetEnemyManager().DespawnEnemy(gameObject);
         }
+    }
+    private IEnumerator Invincible(float waitTime)
+    {
+        canTakeDamage = false;
+        yield return new WaitForSeconds(waitTime);
+        canTakeDamage = true;
     }
     public GameObject GetTarget()
     {

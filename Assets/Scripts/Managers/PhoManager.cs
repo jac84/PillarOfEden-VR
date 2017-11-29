@@ -28,9 +28,10 @@ public class PhoManager : Photon.MonoBehaviour {
     //Really can't do anything until this happens.
     public virtual void OnJoinedRoom()
     {
-        //networkstatus = true;
-        //PlayerObj = PhotonNetwork.Instantiate("Player", new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), 0);
-        //PlayerObj.GetComponent<PhotonView>().owner.NickName = "V.R Player";
+        networkstatus = true;
+        PlayerObj = PhotonNetwork.Instantiate("PlayerPhotonViewObject", GamManager.singleton.playerStartPosition.position,Quaternion.identity,0);
+        GamManager.singleton.player = PlayerObj.GetComponentInChildren<VRPlayer>();
+        PlayerObj.GetComponent<PhotonView>().owner.NickName = "V.R Player";
     }
     
     public virtual void OnLeftRoom()

@@ -77,7 +77,6 @@ public class Prototype : MonoBehaviour {
 		}
 		if(instance == null)
         {
-            Debug.Log("NULL");
             this.Instantiate<Prototype>();
         }
 		instance.gameObject.SetActive(true);

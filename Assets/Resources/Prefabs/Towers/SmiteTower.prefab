@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4129627882474750}
-  m_Layer: 12
+  m_Layer: 2
   m_Name: ProjectilePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,9 @@ GameObject:
   - component: {fileID: 136645470428467552}
   - component: {fileID: 23654938643612948}
   - component: {fileID: 114226902451997914}
-  m_Layer: 12
+  - component: {fileID: 114499225167401782}
+  - component: {fileID: 114463641365436502}
+  m_Layer: 9
   m_Name: SmiteTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,13 +77,13 @@ GameObject:
   - component: {fileID: 23630400431632102}
   - component: {fileID: 114636973818969992}
   - component: {fileID: 114779371017839584}
-  m_Layer: 13
+  m_Layer: 12
   m_Name: SmiteAOE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4040184267278284
 Transform:
   m_ObjectHideFlags: 1
@@ -89,7 +91,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1325151364908396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.63, y: 1.28, z: 23}
+  m_LocalPosition: {x: 32.8, y: 1.28, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4560182616864934}
@@ -247,6 +249,97 @@ MonoBehaviour:
   projectileStart: {fileID: 4129627882474750}
   bulletSpeed: 0.4
   expansionVector: {x: 12, y: 12, z: 12}
+--- !u!114 &114463641365436502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1325151364908396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  OwnerShipWasTransfered: 0
+  prefixBackup: -1
+  synchronization: 3
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 4040184267278284}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  currentMasterID: -1
+  isRuntimeInstantiated: 0
+--- !u!114 &114499225167401782
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1325151364908396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    InterpolateMoveTowardsAcceleration: 2
+    InterpolateMoveTowardsDeceleration: 2
+    InterpolateSpeedCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: -1
+        value: 0
+        inSlope: 0
+        outSlope: Infinity
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 1
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 4
+        value: 4
+        inSlope: 1
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+    DrawErrorGizmo: 1
+  m_RotationModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
 --- !u!114 &114636973818969992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -275,6 +368,9 @@ MonoBehaviour:
   protoType: {fileID: 114636973818969992}
   dieOnHit: 0
   owner: {fileID: 0}
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 4608
 --- !u!114 &114897141919236938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -287,6 +383,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tower: {fileID: 114226902451997914}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!135 &135859975685275418
 SphereCollider:
   m_ObjectHideFlags: 1

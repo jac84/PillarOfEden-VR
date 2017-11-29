@@ -5,7 +5,7 @@ public class Cannon : Tower
 {
     [Header("Projectile Behavior")]
     [SerializeField] private float shootAngle;
-    private Vector3 BallisticVel(Transform target, float angle)
+    public static Vector3 BallisticVel(Transform target, float angle, Transform transform, float bulletSpeed)
     {
         Vector3 dir = target.position - transform.position;  
         float h = dir.y;  
@@ -28,6 +28,6 @@ public class Cannon : Tower
         OnTriggerAoE cannon = projectile.Instantiate<OnTriggerAoE>();
         cannon.transform.position = projectileStart.position;
         cannon.SetDamage(damage);
-        cannon.gameObject.GetComponent<Rigidbody>().velocity = BallisticVel(target.transform, shootAngle);
+        cannon.gameObject.GetComponent<Rigidbody>().velocity = BallisticVel(target.transform, shootAngle,transform,bulletSpeed);
     }
 }

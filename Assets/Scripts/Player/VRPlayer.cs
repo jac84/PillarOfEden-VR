@@ -36,7 +36,6 @@ public class VRPlayer : MonoBehaviour
             currentSpell.GetGesture().gameObject.SetActive(true);
             if (!GamManager.singleton.IsLeftHanded())
             {
-                Debug.Log(rightHandPosition.parent.parent.parent.GetChild(1).name);
                 rightHandPosition.parent.parent.parent.GetChild(1).GetComponent<SkinnedMeshRenderer>().material = currentSpell.GetHandMaterial();
             }
 
@@ -47,7 +46,7 @@ public class VRPlayer : MonoBehaviour
     private void Update()
     {
         CheckShield();
-        CheckInventory();
+        //CheckInventory();
         playerBeads.UpdateHPMP();
     }
     public Spell GetCurrentSpell()
@@ -184,5 +183,9 @@ public class VRPlayer : MonoBehaviour
     public bool GetShieldActivated()
     {
         return shieldActivated;
+    }
+    public void ResetPlayer()
+    {
+        playerBeads.ResetBeads();
     }
 }

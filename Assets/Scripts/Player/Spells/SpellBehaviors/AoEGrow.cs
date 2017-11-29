@@ -16,6 +16,7 @@ public class AoEGrow : BehaviorAbstract
     {
         protoType.OnReturnFromPool += Set;
         bc = GetComponent<BoxCollider>();
+        transform.parent = null;
     }
     private void Start()
     {

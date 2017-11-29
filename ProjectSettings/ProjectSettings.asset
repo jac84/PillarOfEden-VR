@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 12
-  productGUID: 4ba1fa7ec56699647a3a18e5ad6384d7
+  productGUID: 0697502461bf18d40b9e1a6c4f9481a6
   AndroidProfiler: 0
   defaultScreenOrientation: 4
   targetDevice: 2
@@ -233,10 +233,8 @@ PlayerSettings:
   m_BuildTargetGraphicsAPIs: []
   m_BuildTargetVRSettings:
   - m_BuildTarget: Standalone
-    m_Enabled: 1
-    m_Devices:
-    - None
-    - Oculus
+    m_Enabled: 0
+    m_Devices: []
   - m_BuildTarget: iOS
     m_Enabled: 0
     m_Devices: []
@@ -568,8 +566,7 @@ PlayerSettings:
   incrementalIl2cppBuild: {}
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 0
-  apiCompatibilityLevelPerPlatform:
-    Standalone: 1
+  apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: PillarOfEden
@@ -650,13 +647,12 @@ PlayerSettings:
     daydream:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
-  cloudServicesEnabled:
-    UNet: 1
+  cloudServicesEnabled: {}
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 248f6a1e-d60c-4c72-b78d-d2952456d955
-  projectName: PillarOfEden (1)
-  organizationId: laketoya
+  cloudProjectId: 
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

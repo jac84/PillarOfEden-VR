@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Pathfinding;
+using Leap.Unity;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,8 +22,15 @@ public class GamManager : Photon.MonoBehaviour
     private EnemyManager enemymanager;
     [SerializeField]
     private RoundManager roundmanager;
+    [SerializeField]
+    public Transform playerStartPosition;
+    [SerializeField]
+    private LeapProvider leapServiceProvider;
+
+    public VRTK.VRTK_SDKManager VRTKManager;
     [SerializeField] private EntityManager entity_manager;
     [SerializeField] private GameObject AStarGrid;
+    [SerializeField] private Pillar pillar;
     private bool Gameready;
 
     
@@ -54,7 +62,17 @@ public class GamManager : Photon.MonoBehaviour
             Network_Manager.AutoConnect("test");
 
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            roundmanager.StartSpawn();
+        }
+        else if(Input.GetKeyUp(KeyCode.R))
+        {
+            RestartGame();
+        }
+    }
     public bool IsLeftHanded()
     {
         return LeftHanded;
@@ -66,7 +84,14 @@ public class GamManager : Photon.MonoBehaviour
         PhotonNetwork.CloseConnection(PhotonNetwork.player);
         PhotonNetwork.Disconnect();
     }
-
+    public void RestartGame()
+    {
+        roundmanager.RestartRoundManager();
+        enemymanager.EnemyCleanup();
+        player.ResetPlayer();
+        player.transform.position = playerStartPosition.position;
+        pillar.ResetPillar();
+    }
     //This here is a test. When running this function please use 
     //gamestart(Network_Manager.NetworkStatus(),difficulty) It should return a proper network status.
     void GameStart(bool NetworkState, int difficulty)
@@ -106,5 +131,17 @@ public class GamManager : Photon.MonoBehaviour
     public VRPlayer GetVRPlayer()
     {
         return player;
+    }
+    public Pillar GetPillar()
+    {
+        return pillar;
+    }
+    public LeapProvider GetLeapServiceProvider()
+    {
+        return leapServiceProvider;
+    }
+    public void SetLeapServiceProvider(LeapProvider s)
+    {
+        leapServiceProvider = s;
     }
 }

@@ -13,6 +13,7 @@ public class Pillar : MonoBehaviour, IHealth
     private bool canTakeDamage = true;
     private void Start()
     {
+        canTakeDamage = true;
         currentHp = MaxHp;
     }
     public void TakeDamage(float amount,Vector3 origin)
@@ -29,5 +30,9 @@ public class Pillar : MonoBehaviour, IHealth
         canTakeDamage = false;
         yield return new WaitForSeconds(waitTime);
         canTakeDamage = true;
+    }
+    public void ResetPillar()
+    {
+        currentHp = MaxHp;
     }
 }

@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using VRStandardAssets.Utils;
-public class BaseEnmyBhvr : MonoBehaviour
+public class BaseEnmyBhvr : MonoBehaviour, IHealth
 {
 
     private float range;
     [SerializeField] private float targetCallibration;
     [SerializeField] private float sightRadius;
+    [SerializeField] private float maxHP;
+    [SerializeField] private float currentHP;
     private Transform self;
     private Transform myTarget;
     private Vector3 lastBestPosition;
@@ -18,7 +20,9 @@ public class BaseEnmyBhvr : MonoBehaviour
     private float distFromLast;
     [SerializeField] protected BaseEnemyAttack enemyAttack;
     [SerializeField] private InteractableObject interactable;
+    [SerializeField] private float invTime;
 
+    private bool canTakeDamage;
     private float myStartSpeed;
 
     public void HoverOver()
@@ -35,6 +39,10 @@ public class BaseEnmyBhvr : MonoBehaviour
         myPath = GetComponent<AIPath>();
         myStartSpeed = myPath.speed;
         pathChange = false;
+        if(myPath.target == null)
+        {
+            myPath.target = GamManager.singleton.GetPillar().transform;
+        }
         myTarget = myPath.target;
         self = GetComponent<Transform>();
         range = enemyAttack.GetAttackRange();
@@ -43,6 +51,8 @@ public class BaseEnmyBhvr : MonoBehaviour
             interactable.OnOver += HoverOver;
             interactable.OnOut += HoverOut;
         }
+        currentHP = maxHP;
+        canTakeDamage = true;
     }
 
     void Update()
@@ -105,5 +115,25 @@ public class BaseEnmyBhvr : MonoBehaviour
     public void TargetReached()
     {
         myPath.speed = 0;
+    }
+
+    public void TakeDamage(float amount, Vector3 origin)
+    {
+        //Check If Dead
+        if (canTakeDamage)
+        {
+            currentHP -= amount;
+            StartCoroutine(Invincible(invTime));
+        }
+        if (currentHP <= 0)
+        {
+            GamManager.singleton.GetEnemyManager().DespawnEnemy(gameObject);
+        }
+    }
+    private IEnumerator Invincible(float waitTime)
+    {
+        canTakeDamage = false;
+        yield return new WaitForSeconds(waitTime);
+        canTakeDamage = true;
     }
 }

@@ -64,6 +64,7 @@ namespace LeapMotionSimpleControl
         // Use this for initialization
         void Start()
         {
+            GamManager.singleton.SetLeapServiceProvider(_leapHandProvider);
             Invoke("initGesture", 3f);
         }
 

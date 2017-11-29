@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyManager : Photon.MonoBehaviour
 {
 
-    [SerializeField] private List<Enemy> enemies;
+    [SerializeField] private List<BaseEnmyBhvr> enemies;
     [SerializeField] private GameObject lastEnemyToBeSpawned = null;
     //[SerializeField] private List<string> Enemies;
     // Use this for initialization
@@ -25,17 +25,19 @@ public class EnemyManager : Photon.MonoBehaviour
     */
     void FixedUpdate()
     {
+        /*
         foreach (Enemy enemy in enemies)
         {
             enemy.UpdateEnemyMovement();
         }
+        */
     }
     /**
     * @brief Spawn Specified Enemy
      */
     public void SpawnEnemy(string enemy,Vector3 position)
     {
-        Enemy eCom = null;
+        BaseEnmyBhvr eCom = null;
         GameObject e = null;
         //Remember to replace Instatiate with Photons Instatiate method!!!!!
         e = PhotonNetwork.Instantiate(enemy, position, Quaternion.identity,0);
@@ -44,7 +46,7 @@ public class EnemyManager : Photon.MonoBehaviour
             Debug.Log("Failed to initiate enemy");
             return;
         }
-        eCom = e.GetComponent<Enemy>();
+        eCom = e.GetComponent<BaseEnmyBhvr>();
         enemies.Add(eCom);
         lastEnemyToBeSpawned = e;
     }
@@ -53,10 +55,10 @@ public class EnemyManager : Photon.MonoBehaviour
      */
     public void DespawnEnemy(GameObject enemy)
     {
-        Enemy foundEnemy = null;
+        BaseEnmyBhvr foundEnemy = null;
         if (enemy != null)
         {
-            foundEnemy = enemies.Find(e => e == enemy.GetComponent<Enemy>());
+            foundEnemy = enemies.Find(e => e == enemy.GetComponent<BaseEnmyBhvr>());
             if (foundEnemy != null)
             {
                enemies.Remove(foundEnemy);

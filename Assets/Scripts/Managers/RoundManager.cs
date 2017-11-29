@@ -20,7 +20,6 @@ public class RoundManager : MonoBehaviour
     public int spawnPointsFinished = 0;
     int currentRound = 0;
     int currentWave = 0;
-    private int counter;
     private bool roundStart;
     public void Awake()
     {
@@ -32,7 +31,7 @@ public class RoundManager : MonoBehaviour
     private void Start()
     {
         roundStart = false;
-        StartCoroutine(StartRound(1));
+        currentRound = 1;
     }
     private void Update()
     {
@@ -64,6 +63,19 @@ public class RoundManager : MonoBehaviour
             }
         }
     }
+    public void StartSpawn()
+    {
+        if(!roundStart)
+            StartCoroutine(StartRound(1));
+    }
+    public void RestartRoundManager()
+    {
+        roundStart = false;
+        currentRound = 1;
+        spawnPointsFinished = 0;
+         currentRound = 0;
+         currentWave = 0;
+}
     // Update is called once per frame
     IEnumerator StartRound(int round)
     {
